@@ -6,24 +6,21 @@ Clone the repository to the local machine
 
 `$ git clone https://github.com/rafaelmata357/Data-Science-Udacity/tree/master/Airbnb`
 
-This libraries used:
+This notebook uses this libraries
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from wordcloud import WordCloud
-from sklearn import preprocessing
-import folium
-import folium.plugins
-from folium.features import *
+- pandas
+- numpy 
+- matplotlib
+- seaborn 
+- nltk
+- wordcloud
+- sklearn
+- folium
 
 The Airnbn dataset for Boston can be found [here](https://www.kaggle.com/airbnb/boston)
 The geojson file for Boston can be forun [here](http://data.insideairbnb.com/united-states/ma/boston/2020-10-24/visualisations/neighbourhoods.geojson)
 
-The python version used: 3.8
+The python version used: **3.8**
 
 
 ## Project Motivation
@@ -35,7 +32,7 @@ As part of the Udacity Data Science nanodegree this is an analyzis of the Boston
 
 - airbnb_V2.ipynb : Jupyter notebook with the source code for the analysis
 - README.md : This file
-- example.png : Output example image
+
 
 ## How To Interact With Your Project 
 
@@ -43,7 +40,7 @@ As part of the Udacity Data Science nanodegree this is an analyzis of the Boston
 
 1. Business Understanding
 
-    - Starting in august 2008 Airbnb  an American company  introduced an app for online lodging disrupting the market,  primarily for homestays  this app offers  the house owners the opportunity to rent available house rooms and give the guests different tourism experiences, this model has increased year over year and Boston is not the exception
+    - Starting in august 2008 Airbnb  an American company  introduced an app for online lodging disrupting the market,  primarily for home stays  this app offers  the house owners the opportunity to rent available house rooms and give the guests different tourism experiences, this model has increased year over year and Boston is not the exception
 
 2. Data Understanding
     - The dataset contains three tables:
@@ -57,7 +54,7 @@ As part of the Udacity Data Science nanodegree this is an analyzis of the Boston
         - Box plots
         - Heat Maps
 
-3. Prepare Data
+3. Data preparation
     - A data cleaning process is followed including:
         - Removed columns with unique values
         - Inputing: the NaN values are filled with the most common value for categorical features, and the average for numerical features
@@ -66,7 +63,7 @@ As part of the Udacity Data Science nanodegree this is an analyzis of the Boston
         - Use NLTK library to extract the main feature from the transit and neighborhood description columns
 
 4. Data Modeling
-    - Two model a linear regression two methods are used:
+    - To model a linear regression two methods are used:
         - Linear regression
         - Random Forest regression
     - The dataset is normalized using Min-Max scaler
