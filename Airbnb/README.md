@@ -18,7 +18,7 @@ This notebook uses this libraries
 - folium
 
 The Airnbn dataset for Boston can be found [here](https://www.kaggle.com/airbnb/boston)
-The geojson file for Boston can be forun [here](http://data.insideairbnb.com/united-states/ma/boston/2020-10-24/visualisations/neighbourhoods.geojson)
+The geojson file for Boston can be found [here](http://data.insideairbnb.com/united-states/ma/boston/2020-10-24/visualisations/neighbourhoods.geojson)
 
 The python version used: **3.8**
 
