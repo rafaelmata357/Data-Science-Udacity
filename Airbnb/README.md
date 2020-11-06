@@ -78,12 +78,12 @@ As part of the Udacity Data Science nanodegree this is an analyzis of the Boston
         - R2 Score
 
 6. Deploy
-    - The Deploy is an article posted in (medium)[https://medium.com/] and can be foud here[article](https://rafaelmata357.medium.com/a-guide-tour-to-the-boston-airbnbs-market-d7689ddf9d6c)
+    - The Deploy is an article posted in [medium](https://medium.com/) and can be found [here](https://rafaelmata357.medium.com/a-guide-tour-to-the-boston-airbnbs-market-d7689ddf9d6c)
 
 
 ## Terms of use:
 
-This notebook is not a formal study, is an initial analyzis and is made only to show how to use the CRISP Methodology to understand a dataset an answer question related to the Boston  Airbnb market, . 
+This notebook is not a formal study, is an initial analyzis and is made only to show how to use the CRISP Methodology to understand a dataset and answer questions related to the Boston  Airbnb market, . 
 
 ## License:
 
