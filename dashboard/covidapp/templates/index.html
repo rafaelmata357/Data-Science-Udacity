@@ -60,6 +60,31 @@
             <h4 id="tag-line" class="text-muted">Source Data: JHU CSSE COVID-19 Dataset</h4>
             
         </div>
+
+        <!-- dropdown menu for filter -->
+		<div class="dropdown">
+		  		
+            <button class="btn btn-danger btn-lg dropdown-toggle" type="button" 
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" 
+            aria-expanded="false">Filter by country</button>
+            
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="check-boxes">
+           
+              <form class="px-4 py-3" role="form" method="post" action="/" id="form-filter">
+                  {% for country in all_countries %}
+                      <div class="form-check">
+                          <!-- Check the country filter boxes for all countries submitted from the form -->
+                       
+                            <input class="form-check-input country-check" type="radio" name="{{ country}}" value="{{ country }}" id="defaultCheck1-{{country}}">							
+                     
+                            <label class="form-check-label" for="defaultCheck1-{{country}}">{{country}}</label>
+                      </div>
+                  {% endfor %}
+                    <button id="country_selector" type="submit" class="btn btn-primary my-1">Submit</button>
+              </form>
+          </div>
+      </div>
+
         
         <!--charts-->       
         <div id="charts" class="container mt-4 text-center">
