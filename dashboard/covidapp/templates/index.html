@@ -72,12 +72,14 @@
            
               <form class="px-4 py-3" role="form" method="post" action="/" id="form-filter">
                   {% for country in all_countries %}
-                      <div class="form-check">
+                      <div class="radio">
                           <!-- Check the country filter boxes for all countries submitted from the form -->
                        
-                            <input class="form-check-input country-check" type="radio" name="{{ country}}" value="{{ country }}" id="defaultCheck1-{{country}}" >							
+                          <input class="form-check-input country-check" type="radio" name="optradio" value="{{ country }}" id="defaultCheck1-{{country}}" >							
                      
-                            <label class="form-check-label" for="defaultCheck1-{{country}}">{{country}}</label>
+                                <label class="form-check-label" for="defaultCheck1-{{country}}">{{country}}</label> 
+
+                           <!--   <label><input type="radio" name="optradio" > {{country}}</label> -->
                       </div>
                   {% endfor %}
                     <button id="country_selector" type="submit" class="btn btn-primary my-1">Submit</button>
