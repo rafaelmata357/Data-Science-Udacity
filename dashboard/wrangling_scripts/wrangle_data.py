@@ -10,6 +10,7 @@ URL_ACCUMULATED_CASES ='https://raw.githubusercontent.com/CSSEGISandData/COVID-1
 URL_RECOVERED = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'
 URL_DEATHS = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
 
+country_default = 'Costa Rica'
 
 
 def get_and_cleandata(URL, start_date, end_date):
@@ -95,37 +96,9 @@ def rolling_window(dataset, window, countries):
     
     return rolling
 
-def cleandata(dataset, keepcolumns = ['Country Name', '1990', '2015'], value_variables = ['1990', '2015']):
-    """Clean world bank data for a visualizaiton dashboard
 
-    Keeps data range of dates in keep_columns variable and data for the top 10 economies
-    Reorients the columns into a year, country and value
-    Saves the results to a csv file
 
-    Args:
-        dataset (str): name of the csv data file
-
-    Returns:
-        None
-
-    """    
-    df = pd.read_csv(dataset, skiprows=4)
-
-    # Keep only the columns of interest (years and country name)
-    df = df[keepcolumns]
-
-    top10country = ['United States', 'China', 'Japan', 'Germany', 'United Kingdom', 'India', 'France', 'Brazil', 'Italy', 'Canada']
-    df = df[df['Country Name'].isin(top10country)]
-
-    # melt year columns  and convert year to date time
-    df_melt = df.melt(id_vars='Country Name', value_vars = value_variables)
-    df_melt.columns = ['country','year', 'variable']
-    df_melt['year'] = df_melt['year'].astype('datetime64[ns]').dt.year
-
-    # output clean csv file
-    return df_melt
-
-def return_figures():
+def return_figures(countries=country_default):
     """Creates four plotly visualizations
 
     Args:
@@ -136,9 +109,18 @@ def return_figures():
 
     """
 
-  # Read the datasets
+    # Read the datasets
 
-    country = 'Costa Rica'
+    #Filter by country
+    if not bool(countries):
+        countries = country_default
+
+    if not type(countries) is str:
+        country = countries.to_dict()
+        country = list(country.values())[0]
+    else:
+        country = 'Costa Rica'
+    
     today = date.today()
     yesterday = today - timedelta(days=1)
     end_date = yesterday.strftime("%Y-%m-%d") 
@@ -155,7 +137,9 @@ def return_figures():
     rolling_daily_deaths = daily_death_dataset[country].rolling('14D') 
 
 
-    #Filter by country
+  
+
+
     accumulated_dataset = accumulated_dataset.loc[country]
     #recovered_dataset = recovered_dataset.loc[countries]
     death_dataset = death_dataset.loc[country]
@@ -175,7 +159,10 @@ def return_figures():
        )
       )
 
-    layout_one = dict(title = 'Costa Rica Covid-19 Accumulated cases',
+    #Costa Rica 
+
+   
+    layout_one = dict(title = 'Covid-19 Accumulated cases for {}'.format(country),
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Cases'),
                 )
@@ -193,7 +180,7 @@ def return_figures():
        )
     )
 
-    layout_two = dict(title = 'Accumulated Covid Death Cases ',
+    layout_two = dict(title = 'Accumulated Covid Death Cases for {}'.format(country),
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Deaths'),
                 )
@@ -210,7 +197,7 @@ def return_figures():
       )
     )
 
-    layout_three = dict(title = 'Accumulated cases by week',
+    layout_three = dict(title = 'Accumulated cases by week for {}'.format(country),
                 xaxis = dict(title = 'Week',),                  
                 yaxis = dict(title = 'Cases'),
                 )
@@ -226,7 +213,7 @@ def return_figures():
       )
     )
 
-    layout_four = dict(title = 'Covid Death cases by week',
+    layout_four = dict(title = 'Covid Death cases by week for {}'.format(country),
                 xaxis = dict(title = 'Week'),
                 yaxis = dict(title = 'Deaths'),
                 )
@@ -246,7 +233,7 @@ def return_figures():
        )
       )
 
-    layout_five = dict(title = 'Accumulated cases 14 days window',
+    layout_five = dict(title = 'Accumulated cases 14 days window for {}'.format(country),
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Cases'),
                 )
@@ -265,7 +252,7 @@ def return_figures():
        )
       )
 
-    layout_six = dict(title = 'Accumulated death cases 14 days window',
+    layout_six = dict(title = 'Accumulated death cases 14 days window for {}'.format(country),
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Cases'),
                 )
