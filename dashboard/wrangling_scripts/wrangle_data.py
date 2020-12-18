@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# 
+# PROGRAMMER   : Rafael Mata M.
+# DATE CREATED :  04 December 2020                                 
+# REVISED DATE :  17 December 2020
+# PURPOSE: Create a program to create a web app than tracks the Covid daily information for different countries from JHU dataset
+
+
+# Imports python modules
+
+
 import pandas as pd
 import plotly.graph_objs as go
 import datetime
