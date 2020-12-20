@@ -5,6 +5,8 @@
 # DATE CREATED :  04 December 2020                                 
 # REVISED DATE :  18 December 2020
 # PURPOSE: Create a program to create a web app than tracks the Covid daily information for different countries from JHU dataset
+#
+# 
 
 
 # Imports python modules
@@ -111,7 +113,7 @@ def rolling_window(dataset, window, countries):
 
 
 def return_figures(countries=country_default):
-    """Creates four plotly visualizations
+    """Creates four plotly visualizations, function based on original example from Udacity DataScience Nanodegree
 
     Args:
         None
