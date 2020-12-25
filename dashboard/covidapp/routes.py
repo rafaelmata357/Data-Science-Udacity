@@ -1,3 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# 
+# PROGRAMMER   : Rafael Mata M.
+# DATE CREATED :  04 December 2020                                 
+# REVISED DATE :  24 December 2020
+# PURPOSE: routes script to use flask as a backend
+#
+# 
+
+
+# Imports python modules
+
 from covidapp import app
 import json, plotly
 from flask import render_template, request, Response, jsonify
