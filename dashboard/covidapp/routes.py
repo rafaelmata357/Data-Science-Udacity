@@ -21,7 +21,7 @@ from wrangling_scripts.wrangle_data import return_figures
 def index():
 
 	# List of countries for filter
-	country_codes = ['Costa Rica','Panama','Nicaragua','Guatemala','Honduras','El Salvador','US','Mexico','Canada','Colombia','Chile','Argentina','Venezuela','Ecuador','Uruguay', 'Brazil','Peru','India','Italy','Spain','France','Germany','United Kingdom']
+	country_codes = ['Costa Rica','Panama','Nicaragua','Guatemala','Honduras','El Salvador','US','Mexico','Canada','Colombia','Chile','Argentina','Venezuela','Ecuador','Uruguay', 'Brazil','Peru','India','Italy','Spain','France','Germany','United Kingdom','Russia']
 
 	# Parse the POST request countries list
 	if (request.method == 'POST') and request.form:
