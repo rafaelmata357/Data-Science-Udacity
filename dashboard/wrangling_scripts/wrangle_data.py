@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  04 December 2020                                 
-# REVISED DATE :  18 December 2020
+# REVISED DATE :  30 December 2020
 # PURPOSE: Create a program to create a web app than tracks the Covid daily information for different countries from JHU dataset
 #
 # 
@@ -270,6 +270,45 @@ def return_figures(countries=country_default):
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Cases'),
                 )
+
+    
+
+    
+   #Graph seven Benford Law analysis for daily reported charts
+   
+    graph_seven = []
+    df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
+
+    graph_seven.append(
+      go.Bar(
+      x = df_weekly.index.tolist(),
+      y = df_weekly.tolist(),
+      )
+    )
+
+    layout_seven = dict(title = 'Accumulated cases 14 days window for {}'.format(country),
+                xaxis = dict(title = 'Day',),
+                yaxis = dict(title = 'Cases'),
+                )
+
+    # sixth chart 14 days accumalated cases rolling window
+
+    graph_eight = []
+ 
+    x_val =  rolling_daily_deaths.sum().index.strftime('%d/%m').tolist()
+    y_val =  rolling_daily_deaths.sum().tolist() 
+    graph_eight.append(
+        go.Scatter(
+        x = x_val,
+        y = y_val,
+        mode = 'lines',
+       )
+      )
+
+    layout_eight = dict(title = 'Accumulated death cases 14 days window for {}'.format(country),
+                xaxis = dict(title = 'Day',),
+                yaxis = dict(title = 'Cases'),
+                )
     
     # append all charts to the figures list
     figures = []
@@ -279,5 +318,7 @@ def return_figures(countries=country_default):
     figures.append(dict(data=graph_four, layout=layout_four))
     figures.append(dict(data=graph_five, layout=layout_five))
     figures.append(dict(data=graph_six, layout=layout_six))
+    figures.append(dict(data=graph_eight, layout=layout_eight))
+    figures.append(dict(data=graph_eight, layout=layout_eight))
     
     return figures
