@@ -298,12 +298,13 @@ def return_figures(countries=country_default):
 
     graph_eight = []
  
-    df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
+    benford_death_cases = Benford(dataset=daily_death_dataset[country].values)
+    benford_death_cases.benford_analysis()
 
     graph_eight.append(
       go.Bar(
-      x = df_weekly.index.tolist(),
-      y = df_weekly.tolist(),
+      x = list(benford_death_cases.digits),
+      y = list(benford_death_cases.digits_count),
       )
     )
 
