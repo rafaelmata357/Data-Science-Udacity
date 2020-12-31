@@ -279,20 +279,13 @@ def return_figures(countries=country_default):
 
     graph_seven = []
     
-    benford_daily_cases = Benford(dataset=daily_dataset.values)
+    benford_daily_cases = Benford(dataset=daily_dataset[country].values)
     benford_daily_cases.benford_analysis()
 
     graph_seven.append(
       go.Bar(
-      x = df_weekly.index.tolist(),
-      y = df_weekly.tolist(),
-      )
-    )
-
-    graph_seven.append(
-      go.Bar(
-      x = df_weekly.index.tolist(),
-      y = df_weekly.tolist(),
+      x = list(benford_daily_cases.digits),
+      y = list(benford_daily_cases.digits_count),
       )
     )
 
