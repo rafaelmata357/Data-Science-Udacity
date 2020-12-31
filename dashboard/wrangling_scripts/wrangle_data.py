@@ -17,6 +17,7 @@ import plotly.graph_objs as go
 import datetime
 from datetime import date, timedelta
 import numpy as np
+from benford import Benford
 
 #URL to get the raw data JHU CSSE COVID-19 Dataset
 
@@ -275,9 +276,11 @@ def return_figures(countries=country_default):
 
     
    #Graph seven Benford Law analysis for daily reported charts
-   
+
     graph_seven = []
-    df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
+    
+    benford_daily_cases = Benford(dataset=daily_dataset.values)
+    benford_daily_cases.benford_analysis()
 
     graph_seven.append(
       go.Bar(
@@ -286,28 +289,34 @@ def return_figures(countries=country_default):
       )
     )
 
-    layout_seven = dict(title = 'Accumulated cases 14 days window for {}'.format(country),
-                xaxis = dict(title = 'Day',),
-                yaxis = dict(title = 'Cases'),
+    graph_seven.append(
+      go.Bar(
+      x = df_weekly.index.tolist(),
+      y = df_weekly.tolist(),
+      )
+    )
+
+    layout_seven = dict(title = 'Daily Cases Benford´s Law analysis for {}'.format(country),
+                xaxis = dict(title = 'First Digit',),
+                yaxis = dict(title = '%'),
                 )
 
     # sixth chart 14 days accumalated cases rolling window
 
     graph_eight = []
  
-    x_val =  rolling_daily_deaths.sum().index.strftime('%d/%m').tolist()
-    y_val =  rolling_daily_deaths.sum().tolist() 
-    graph_eight.append(
-        go.Scatter(
-        x = x_val,
-        y = y_val,
-        mode = 'lines',
-       )
-      )
+    df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
 
-    layout_eight = dict(title = 'Accumulated death cases 14 days window for {}'.format(country),
-                xaxis = dict(title = 'Day',),
-                yaxis = dict(title = 'Cases'),
+    graph_eight.append(
+      go.Bar(
+      x = df_weekly.index.tolist(),
+      y = df_weekly.tolist(),
+      )
+    )
+
+    layout_eight = dict(title = 'Daily death cases Benford´s Law analysis {}'.format(country),
+                xaxis = dict(title = 'First Digit',),
+                yaxis = dict(title = '%'),
                 )
     
     # append all charts to the figures list
@@ -318,7 +327,7 @@ def return_figures(countries=country_default):
     figures.append(dict(data=graph_four, layout=layout_four))
     figures.append(dict(data=graph_five, layout=layout_five))
     figures.append(dict(data=graph_six, layout=layout_six))
-    figures.append(dict(data=graph_eight, layout=layout_eight))
+    figures.append(dict(data=graph_seven, layout=layout_seven))
     figures.append(dict(data=graph_eight, layout=layout_eight))
     
     return figures
