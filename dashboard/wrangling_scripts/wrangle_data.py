@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  04 December 2020                                 
-# REVISED DATE :  30 December 2020
+# REVISED DATE :  05 January 2021
 # PURPOSE: Create a program to create a web app than tracks the Covid daily information for different countries from JHU dataset
 #
 # 
