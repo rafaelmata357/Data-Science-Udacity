@@ -177,7 +177,7 @@ def return_figures(countries=country_default):
     #Costa Rica 
 
    
-    layout_one = dict(title = 'Covid-19 Accumulated cases for {}'.format(country),
+    layout_one = dict(title = 'Accumulated cases for {}'.format(country),
                 xaxis = dict(title = 'Day',),
                 yaxis = dict(title = 'Cases'),
                 )
