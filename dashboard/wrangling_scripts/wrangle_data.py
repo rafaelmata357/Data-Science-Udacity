@@ -164,7 +164,7 @@ def return_figures(countries=country_default):
     
     graph_one = []
     
-    x_val =  accumulated_dataset.index.strftime('%d/%m').tolist()
+    x_val =  accumulated_dataset.index.strftime('%d/%m/%y').tolist()
     y_val = accumulated_dataset.tolist()  
     graph_one.append(
         go.Scatter(
@@ -184,7 +184,7 @@ def return_figures(countries=country_default):
 
 # second chart plots ararble land for 2015 as a bar chart    
     graph_two = []
-    x_val = death_dataset.index.strftime('%d/%m').tolist()
+    x_val = death_dataset.index.strftime('%d/%m/%y').tolist()
     y_val = death_dataset.tolist()
 
     graph_two.append(
@@ -238,7 +238,7 @@ def return_figures(countries=country_default):
 
     
   
-    x_val =  rolling_daily.sum().index.strftime('%d/%m').tolist()
+    x_val =  rolling_daily.sum().index.strftime('%d/%m/%y').tolist()
     y_val = rolling_daily.sum().tolist() 
     graph_five.append(
         go.Scatter(
@@ -257,7 +257,7 @@ def return_figures(countries=country_default):
 
     graph_six = []
  
-    x_val =  rolling_daily_deaths.sum().index.strftime('%d/%m').tolist()
+    x_val =  rolling_daily_deaths.sum().index.strftime('%d/%m/%y').tolist()
     y_val =  rolling_daily_deaths.sum().tolist() 
     graph_six.append(
         go.Scatter(
