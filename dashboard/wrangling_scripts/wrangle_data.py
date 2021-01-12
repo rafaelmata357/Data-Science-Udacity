@@ -203,12 +203,18 @@ def return_figures(countries=country_default):
 
 # third chart plots percent of population that is rural from 1990 to 2015
     graph_three = []
-    df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
+
+    df = daily_dataset[[country]].copy()
+    df['fecha'] = df.index
+    df['fecha2'] = df['fecha'].apply(lambda x: str(x.isocalendar()[1]) + '-' + str(x.isocalendar()[0]).zfill(2))
+    df2 = df.groupby('fecha2',sort=False).sum()
+
+    #df_weekly = daily_dataset.groupby(daily_dataset.index.isocalendar().week)[country].sum()
 
     graph_three.append(
       go.Bar(
-      x = df_weekly.index.tolist(),
-      y = df_weekly.tolist(),
+      x = df2[country].index.tolist(),
+      y = df2[country].tolist(),
       )
     )
 
