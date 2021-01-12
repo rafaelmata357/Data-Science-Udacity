@@ -225,12 +225,17 @@ def return_figures(countries=country_default):
     
 # fourth chart Death cases by week
     graph_four = []
-    df_weekly = daily_death_dataset.groupby(daily_death_dataset.index.isocalendar().week)[country].sum()
+
+    df = daily_death_dataset[[country]].copy()
+    df['fecha'] = df.index
+    df['fecha2'] = df['fecha'].apply(lambda x: str(x.isocalendar()[1]) + '-' + str(x.isocalendar()[0]).zfill(2))
+    df2 = df.groupby('fecha2',sort=False).sum()
+    #df_weekly = daily_death_dataset.groupby(daily_death_dataset.index.isocalendar().week)[country].sum()
 
     graph_four.append(
       go.Bar(
-      x = df_weekly.index.tolist(),
-      y = df_weekly.tolist(),
+      x = df2[country].index.tolist(),
+      y = df2[country].tolist(),
       )
     )
 
