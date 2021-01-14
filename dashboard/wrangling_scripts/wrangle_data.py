@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  04 December 2020                                 
-# REVISED DATE :  05 January 2021
+# REVISED DATE :  13 January 2021
 # PURPOSE: Create a program to create a web app than tracks the Covid daily information for different countries from JHU dataset
 #
 # 
@@ -43,11 +43,11 @@ def get_and_cleandata(URL, start_date, end_date):
      population: dataset with the population per country 
     '''
    
-    dataset = pd.read_csv(URL,index_col=0)  #Se lee los datos de github en formato .csv
+    dataset = pd.read_csv(URL,index_col=0)  #Read the dataset from the JHU Github repo in format .csv
  
     columna = dataset.columns
-    dataset.set_index(columna[0], inplace=True)  # Para regenerar el indice por pais
-    dataset.drop(['Lat', 'Long'], axis=1, inplace=True)  # Para eliminar las colunnas de Lat y Long
+    dataset.set_index(columna[0], inplace=True)  # Set the country as index
+    dataset.drop(['Lat', 'Long'], axis=1, inplace=True)  # Drops columns that are not necessary
 
 
     #population = pd.read_excel('population.xlsx', 'data', index_col=0, na_values=['NA'])
