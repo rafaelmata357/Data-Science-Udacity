@@ -2,10 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import io
 from PIL import Image
 import sys
 from keras.preprocessing import image  
-import keras                
+import keras    
+import cv2            
 
 
 st.set_page_config(
@@ -20,13 +22,21 @@ st.sidebar.markdown('As part of the final project for [Data Science Nanodegree](
 st.sidebar.markdown('The complete Github repo can be found in [Github](https://github.com/rafaelmata357/Data-Science-Udacity/tree/master/dog%20breed%20classifier)')
 st.sidebar.markdown('[![An old rock in the desert](./linkedinlogo.png)](www.nacion.com)')
 
+folderPath = st.text_input('Enter folder path:')
+
+try:
+    filenames = os.listdir(folderPath)
+    selected_filename = st.selectbox('Select a file', filenames)
+    st.write(os.path.join(folderPath, selected_filename))
+except:
+    st.write('Please provid a valid folder path')
 img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
 
 col0,col1, col2, col3 = st.beta_columns([1,1,6,1])
-st.write(sys.version)
-st.write(keras.__version__)
+
 
 if img_file_buffer is not None:
+
     img = Image.open(img_file_buffer)
     with col0:
         st.write('')
@@ -37,11 +47,16 @@ if img_file_buffer is not None:
         st.image(
     img, caption=f"Processed image", width= 400) #use_column_width=True)
     st.write('Procesing Image.... {}'.format(img_file_buffer.name))
-    img1 = image.load_img('/Users/rafaelmata357/Downloads/Limon.JPG', target_size=(224, 224))
+    #img1 = image.load_img(img, target_size=(224, 224))
     
 
     with col3:
         st.write('')
     
 
-st.subheader('Classifier Results:')
+    #img1 = Image.open(io.BytesIO(img_file_buffer))
+    #img1 = cv2.imread(np.array(img))
+#img = img.convert('RGB')
+#img = img.resize(target_size, Image.NEAREST)
+#img = image.img_to_array(img)
+    st.subheader('Classifier Results:')
