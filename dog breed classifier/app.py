@@ -1,3 +1,21 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# 
+# PROGRAMMER   : Rafael Mata M.
+# DATE CREATED :  15 Set 2021                                 
+# REVISED DATE :  25 Set 2021
+# PURPOSE: Create a program to classify Dog breeds with a web interface where users can choose the image 
+#          
+# 
+# Command Line Arguments:
+
+
+# Imports python modules
+
+
+
+
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -72,7 +90,7 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
         )
-    #st.title('      Dog Breed Classifier')
+    st.title('      Dog Breed Classifier')
     
     st.sidebar.title('App Description')
     st.sidebar.markdown('This is an App to classify Human Faces and Dog breeds using **Convolutional Neural Networks**')
@@ -85,7 +103,7 @@ def main():
     if folderPath:    
         filename, valid_file = file_selector(folderPath)
         if valid_file:
-            st.write(filename)
+            #st.write(filename)
             display_image(filename)
             st.write('Procesing Image.... {}'.format(filename.split('/')[-1]))
             st.subheader('Classifier Results:')
