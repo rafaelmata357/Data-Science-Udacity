@@ -4,16 +4,13 @@
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
 # REVISED DATE :  25 Set 2021
-# PURPOSE: Create a program to classify Dog breeds with a web interface where users can choose the image 
+# PURPOSE: Create a program to classify Dog breeds and human faces with a web interface where users can choose the image 
 #          
 # 
-# Command Line Arguments:
+# Command Line:  streamlit app.py
 
 
 # Imports python modules
-
-
-
 
 
 import streamlit as st
@@ -26,63 +23,13 @@ import sys
 from keras.preprocessing import image  
 import keras    
 import cv2   
-
-
-def file_selector(folder_path):
-
-    ''' Function to return the path and file selected
-
-        Params:
-        -------
-        folder_path: string path to the files
-
-        Returns:
-        path + file : string, path and file selected
-        valid_file : boolean, True if a valid file is selected
-    '''
-  
-    selected_filename = ''
-    valid_file = False
-    try:
-        filenames = ['<select>'] + os.listdir(folder_path)
-        selected_filename = st.selectbox('Select an image file', filenames, index=0)
-        valid_file = True
-        if selected_filename == '<select>':
-            valid_file = False
-        
-    except:
-        st.info('Please provid a valid folder path')
-
-    return os.path.join(folder_path, selected_filename), valid_file
-
-def display_image(filename):
-    ''' Function to display an image using st
-
-    Params:
-    img : strig, path
-
-    Returns:
-    None
-    '''
-
-    col0,col1, col2, col3 = st.beta_columns([1,1,6,1])
-    img = Image.open(filename)
-    with col0:
-            st.write('')
-    with col1:
-        st.write('')
-
-    with col2:
-        st.image(
-        img, caption=f"Processed image", width= 400) #use_column_width=True)
-        
-
-    return None
-
+from utils import *
 
 
 
 def main():
+
+    ''' Main program for the app '''
 
 
     st.set_page_config(
@@ -99,6 +46,8 @@ def main():
     st.sidebar.markdown('[![An old rock in the desert](./linkedinlogo.png)](www.nacion.com)')
 
     folderPath = st.text_input('Enter folder path:')
+
+    
 
     if folderPath:    
         filename, valid_file = file_selector(folderPath)
