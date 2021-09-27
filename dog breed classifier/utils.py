@@ -35,14 +35,18 @@ def only_image_files(files):
 
     '''
 
+    img_files = []
+
     for file in files:
     
-    file_type = file.split('.')
-    if len(file_type) >= 2:
-        ext = file_type[-1]
+        file_type = file.split('.')
+        if len(file_type) >= 2:
+            ext = file_type[-1]
     
-        if ext in ['png','jpg','jpeg']:
-            print(file)
+            if ext in ['png','jpg','jpeg']:
+                img_files.append(file)
+
+    return img_files
 
 
 def file_selector(folder_path):
@@ -58,10 +62,11 @@ def file_selector(folder_path):
         valid_file : boolean, True if a valid file is selected
     '''
   
+   
     selected_filename = ''
     valid_file = False
     try:
-        filenames = ['<select>'] + os.listdir(folder_path)
+        filenames = ['<select>'] + only_image_files(os.listdir(folder_path))
         selected_filename = st.selectbox('Select an image file', filenames, index=0)
         valid_file = True
         if selected_filename == '<select>':
