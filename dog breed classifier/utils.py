@@ -35,12 +35,14 @@ def only_image_files(files):
 
     '''
 
-
-    pass
-
-
-
-
+    for file in files:
+    
+    file_type = file.split('.')
+    if len(file_type) >= 2:
+        ext = file_type[-1]
+    
+        if ext in ['png','jpg','jpeg']:
+            print(file)
 
 
 def file_selector(folder_path):
