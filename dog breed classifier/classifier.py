@@ -65,7 +65,7 @@ def classify_human(image):
     return cv_rgb
 
 
-    def face_detector2(img_path, scale, minNeighbors):
+def face_detector2(img_path, scale, minNeighbors):
     
     ''' Algorithm to detect faces using Open Cv library
     
@@ -78,6 +78,7 @@ def classify_human(image):
         Returns:
         --------
         boolean variable indicating if a face is detected
+        cv_rgb : image with boundary rectangle when an image is detected
 
     
     '''
@@ -94,11 +95,13 @@ def classify_human(image):
         # add bounding box to color image
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
     
-        # convert BGR image to RGB for plotting
+            # convert BGR image to RGB for plotting
         cv_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        # display the image, along with bounding box
+            # display the image, along with bounding box
                
-    return len(faces) > 0, cv_rgb
+        return len(faces) > 0, cv_rgb
     else:
+
         return len(faces) > 0
+
