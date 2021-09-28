@@ -19,13 +19,17 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-import io
 from PIL import Image
 import sys
-from keras.preprocessing import image  
 import keras    
-import cv2   
-from utils import *
+import cv2  
+from keras.preprocessing import image  
+from keras.applications.resnet50 import ResNet50
+from keras.applications.resnet50 import preprocess_input, decode_predictions
+from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, AveragePooling2D
+from keras.layers import Dropout, Flatten, Dense
+from keras.models import Sequential
+from extract_bottleneck_features import *
 
 def classify_human(image):
 
@@ -103,5 +107,165 @@ def face_detector2(img_path, scale, minNeighbors):
         return len(faces) > 0, cv_rgb
     else:
 
-        return len(faces) > 0
+        return len(faces) > 0, None
+
+
+@st.cache()  #To load the model once
+def import_resnet50_model():
+
+    ''' Fucntion to define the  pre-trained ResNet-50 model to detect dogs 
+        
+        Paras: None
+
+        Returns :
+
+        Resnet50model: Pretrainned model
+    
+    '''
+
+    ResNet50_model = ResNet50(weights='imagenet')
+
+    return ResNet50_model
+
+def ResNet50_predict_labels(img_path, ResNet50_model):
+    
+    ''' Function to returns prediction vector for image located at img_path, taken from Udacity example notebook
+
+        Params:
+        img_path : string, path to the image
+        ResNet50_model : keras pretrainned ResNet Model
+
+        Returns:
+        label : int, index to the possible dog breed index 
+    '''
+
+    img = preprocess_input(path_to_tensor(img_path))
+    return np.argmax(ResNet50_model.predict(img))
+
+
+def dog_detector(img_path, ResNet50_model):
+    ''' Function that returns "True" if a dog is detected in the image stored at img_path
+        Params:
+        --------
+        img_path: string, path to the image
+
+    '''
+    prediction = ResNet50_predict_labels(img_path,ResNet50_model)
+    return ((prediction <= 268) & (prediction >= 151))
+
+def path_to_tensor(img_path):
+
+    ''' Function to process and Image and convert from 3D to 4D Tensor , function taken from Udacity example notebook
+    
+        Params:
+        --------
+        img_path: string, path to the image
+
+        Returns:
+        4D tensor
+    
+    '''
+
+    # loads RGB image as PIL.Image.Image type
+    img = image.load_img(img_path, target_size=(224, 224))
+    # convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)
+    x = image.img_to_array(img)
+    # convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor
+    return np.expand_dims(x, axis=0)
+
+@st.cache()  #To load the model once
+def load_new_Resnet50(path):
+    ''' Function to load the best weights for the train model with transfer learning  using ResNET-50
+
+        Params:
+        ------
+        path: string, path to the save weights
+
+        Returns:
+        --------
+        new_Resnet50_model : Keras model
+    '''
+
+    #Create the model according with the definition used in the jupyter notebook
+
+    Resnet50_model = Sequential()
+    Resnet50_model.add(GlobalAveragePooling2D(input_shape=(1, 1, 2048)))
+    Resnet50_model.add(Dropout(0.45))
+    Resnet50_model.add(Dense(256, activation='relu'))
+    Resnet50_model.add(Dropout(0.45))
+    Resnet50_model.add(Dense(133, activation='softmax'))
+    Resnet50_model.summary()
+
+    # Load the model weights with the best validation loss.
+
+    new_Resnet50_model = Resnet50_model.load_weights(path)
+     
+
+    return new_Resnet50_model
+
+def Resnet50_predict_breed(img_path, new_Resnet50_model):
+    ''' Fucntion to predict the dog breed using the trainned model with Resnet50 and transfer learning
+
+        Params:
+        ---------
+        img_path: string, path to the image file
+        Resnet50_model: keras model 
+
+        Returns:
+        ---------
+        dog_breed: string, dog breed predicted
+    '''
+    
+    
+    img = preprocess_input(path_to_tensor(img_path))
+    predicted_vector =  np.argmax(ResNet50_model.predict(img))
+    # return dog breed that is predicted by the model
+    dog_name = dog_names[np.argmax(predicted_vector)].split('/')[2]
+    return dog_name 
+
+def classify_images(image_path):
+    ''' Function to classify an image in three categories: Human, Dog, other
+        If a dog is detected it also predict the dog breed
+        
+        This fuction uses different algorithms that are based on NN and CNN to make the predictions
+          - face_detector2(img_path, scale, minNeighbors, show_image)
+          - dog_detector(dog) 
+          - Resnet50_predict_breed(img_path)
+          
+          
+        Params:
+        ---------
+        
+        image_path : string, file path of the image
+        
+        Returns:
+        --------
+        image_detected : string, type of image classified
+        breed_detected : string, type of Dog breed detected, when apply
+        
+        
+        
+    '''
+    
+    show_image = False
+    scale = 1.35
+    minNeighbors = 4
+    
+    image_detected = ''
+    breed_detected = ''
+    
+    
+    if dog_detector(image_path):                                   # Try to detect a Dog
+        image_detected = 'Dog'
+    elif face_detector2(image_path, scale, minNeighbors, show_image):  # Try to detect a human face
+        image_detected = 'Human'
+    else:
+        image_detected = 'Other'
+        
+    if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
+        breed_detected = Resnet50_predict_breed(image_path)
+    else:
+        breed_detected = 'None'
+    
+    return image_detected, breed_detected 
 
