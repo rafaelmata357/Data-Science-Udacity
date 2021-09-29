@@ -194,7 +194,7 @@ def load_new_Resnet50(path):
     Resnet50_model.add(Dense(256, activation='relu'))
     Resnet50_model.add(Dropout(0.45))
     Resnet50_model.add(Dense(133, activation='softmax'))
-    Resnet50_model.summary()
+    #Resnet50_model.summary()
 
     # Load the model weights with the best validation loss.
 
@@ -203,13 +203,14 @@ def load_new_Resnet50(path):
 
     return new_Resnet50_model
 
-def Resnet50_predict_breed(img_path, new_Resnet50_model):
+def Resnet50_predict_breed(img_path, new_Resnet50_model,dog_names):
     ''' Fucntion to predict the dog breed using the trainned model with Resnet50 and transfer learning
 
         Params:
         ---------
         img_path: string, path to the image file
-        Resnet50_model: keras model 
+        new_Resnet50_model: keras model 
+        dog_names: list, list with the dog names
 
         Returns:
         ---------
@@ -218,7 +219,7 @@ def Resnet50_predict_breed(img_path, new_Resnet50_model):
     
     
     img = preprocess_input(path_to_tensor(img_path))
-    predicted_vector =  np.argmax(ResNet50_model.predict(img))
+    predicted_vector =  np.argmax(new_Resnet50_model.predict(img))
     # return dog breed that is predicted by the model
     dog_name = dog_names[np.argmax(predicted_vector)].split('/')[2]
     return dog_name 
@@ -257,7 +258,7 @@ def classify_images(image_path):
     
     if dog_detector(image_path):                                   # Try to detect a Dog
         image_detected = 'Dog'
-    elif face_detector2(image_path, scale, minNeighbors, show_image):  # Try to detect a human face
+    elif face_detector2(image_path, scale, minNeighbors):  # Try to detect a human face
         image_detected = 'Human'
     else:
         image_detected = 'Other'
