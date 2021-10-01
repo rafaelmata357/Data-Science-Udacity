@@ -114,8 +114,8 @@ def display_image(filename):
         st.write('')
 
     with col2:
-        st.image(
-        img, caption=f"Processed image", width= 400) #use_column_width=True)
+        imageLocation = st.empty()
+        imageLocation.image(img, caption=f"Processed image", width= 400) #use_column_width=True)
         
 
-    return col2, col3
+    return col2, col3, imageLocation
