@@ -173,7 +173,7 @@ def path_to_tensor(img_path):
     # convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor
     return np.expand_dims(x, axis=0)
 
-@st.cache()  #To load the model once
+#@st.cache()  #To load the model once
 def load_Inception_model(path):
     ''' Function to create the Imagenet model and load the best weights trainned
 
@@ -220,7 +220,7 @@ def extract_Inception_bottleneck():
     return Inception_bottleneck
 
 def Inception_predict_breed(img_path, Inception_model,dog_names, Inception_bottleneck):
-    
+
     ''' Fucntion to predict the dog breed using the trainned model with Inception and transfer learning
 
         Params:
@@ -235,13 +235,18 @@ def Inception_predict_breed(img_path, Inception_model,dog_names, Inception_bottl
     '''
     
     
-    img = preprocess_input(path_to_tensor(img_path))
-    predicted_vector =  np.argmax(new_Resnet50_model.predict(img))
+    # extract bottleneck features
+    bottleneck_feature = Inception_bottleneck.predict(preprocess_input(path_to_tensor(img_path)))
+
+   
+    # obtain predicted vector
+    predicted_vector = Inception_model.predict(bottleneck_feature)
     # return dog breed that is predicted by the model
     dog_name = dog_names[np.argmax(predicted_vector)].split('/')[2]
+  
     return dog_name 
 
-def classify_images(image_path, new_Resnet50_model,dog_names, ResNet50_model):
+def classify_images(image_path, ResNet50_model):
     ''' Function to classify an image in three categories: Human, Dog, other
         If a dog is detected it also predict the dog breed
         
@@ -280,10 +285,6 @@ def classify_images(image_path, new_Resnet50_model,dog_names, ResNet50_model):
     else:
         image_detected = 'Other'
         
-    if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
-        breed_detected = Resnet50_predict_breed(image_path, new_Resnet50_model, dog_names)
-    else:
-        breed_detected = 'None'
-    
-    return image_detected, breed_detected 
+     
+    return image_detected
 
