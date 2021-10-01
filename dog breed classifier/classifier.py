@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  25 Set 2021
+# REVISED DATE :  29 Set 2021
 # PURPOSE: Create a program to classify Dog breeds images using CNN 
 #          
 # 
@@ -224,7 +224,7 @@ def Resnet50_predict_breed(img_path, new_Resnet50_model,dog_names):
     dog_name = dog_names[np.argmax(predicted_vector)].split('/')[2]
     return dog_name 
 
-def classify_images(image_path):
+def classify_images(image_path, new_Resnet50_model,dog_names, ResNet50_model):
     ''' Function to classify an image in three categories: Human, Dog, other
         If a dog is detected it also predict the dog breed
         
@@ -256,7 +256,7 @@ def classify_images(image_path):
     breed_detected = ''
     
     
-    if dog_detector(image_path):                                   # Try to detect a Dog
+    if dog_detector(image_path, ResNet50_model):                                   # Try to detect a Dog
         image_detected = 'Dog'
     elif face_detector2(image_path, scale, minNeighbors):  # Try to detect a human face
         image_detected = 'Human'
@@ -264,7 +264,7 @@ def classify_images(image_path):
         image_detected = 'Other'
         
     if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
-        breed_detected = Resnet50_predict_breed(image_path)
+        breed_detected = Resnet50_predict_breed(image_path, new_Resnet50_model,dog_names)
     else:
         breed_detected = 'None'
     

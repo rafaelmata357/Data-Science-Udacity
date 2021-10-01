@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  25 Set 2021
+# REVISED DATE :  29 Set 2021
 # PURPOSE: Create a program to classify Dog breeds and human faces with a web interface where users can choose the image 
 #          
 # 
@@ -55,21 +55,23 @@ def main():
     st.write(tiempo())
     
     ResNet50_model = import_resnet50_model() # import ResNet 50 pretrainned model with transfer learning
-    path = 'saved_models/weights.best.Resnet50.hdf5' # Path to the best weights Resnet 50 model trainned
-    new_Resnet50_model = load_new_Resnet50(path)
+    path_save_weights = 'saved_models/weights.best.Resnet50.hdf5' # Path to the best weights Resnet 50 model trainned
+    new_Resnet50_model = load_new_Resnet50(path_save_weights)
+
+    dog_names_path = 'dog_names.json'
+    dog_names = load_dog_names(dog_names_path)
 
     folderPath = st.text_input('Enter folder path:')
-
     
-
     if folderPath:    
         filename, valid_file = file_selector(folderPath)
         if valid_file:
             #st.write(filename)
             display_image(filename)
             st.write('Procesing Image.... {}'.format(filename.split('/')[-1]))
-            st.subheader('Classifier Results:')
-            
+           
+            image_detected, breed_detected  = classify_images(filename, new_Resnet50_model, dog_names, ResNet50_model)
+            st.subheader('Classifier Results: {}'.format(image_detected))
             scale = 1.35
             minNeighbors = 4 
             face_detected, face_image = face_detector2(filename, scale, minNeighbors)
