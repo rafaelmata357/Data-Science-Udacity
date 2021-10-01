@@ -25,7 +25,7 @@ import keras
 import cv2  
 from keras.preprocessing import image  
 from keras.applications.resnet50 import ResNet50
-from keras.applications.resnet50 import preprocess_input, decode_predictions
+from keras.applications.resnet50 import preprocess_input as resnet_preprocess_input
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, AveragePooling2D
 from keras.layers import Dropout, Flatten, Dense
 from keras.models import Sequential
@@ -104,10 +104,9 @@ def face_detector2(img_path, scale, minNeighbors):
 
             # display the image, along with bounding box
                
-        return len(faces) > 0, cv_rgb
-    else:
+  
 
-        return len(faces) > 0, None
+    return len(faces) > 0
 
 
 @st.cache()  #To load the model once
@@ -139,7 +138,7 @@ def ResNet50_predict_labels(img_path, ResNet50_model):
         label : int, index to the possible dog breed index 
     '''
 
-    img = preprocess_input(path_to_tensor(img_path))
+    img = resnet_preprocess_input(path_to_tensor(img_path))
     return np.argmax(ResNet50_model.predict(img))
 
 
@@ -234,11 +233,9 @@ def Inception_predict_breed(img_path, Inception_model,dog_names, Inception_bottl
         dog_breed: string, dog breed predicted
     '''
     
-    
     # extract bottleneck features
     bottleneck_feature = Inception_bottleneck.predict(preprocess_input(path_to_tensor(img_path)))
-
-   
+  
     # obtain predicted vector
     predicted_vector = Inception_model.predict(bottleneck_feature)
     # return dog breed that is predicted by the model
