@@ -29,7 +29,7 @@ from keras.applications.resnet50 import preprocess_input, decode_predictions
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, AveragePooling2D
 from keras.layers import Dropout, Flatten, Dense
 from keras.models import Sequential
-from extract_bottleneck_features import *
+from keras.applications.inception_v3 import InceptionV3, preprocess_input
 
 def classify_human(image):
 
@@ -174,8 +174,8 @@ def path_to_tensor(img_path):
     return np.expand_dims(x, axis=0)
 
 @st.cache()  #To load the model once
-def load_new_Resnet50(path):
-    ''' Function to load the best weights for the train model with transfer learning  using ResNET-50
+def load_Inception_model(path):
+    ''' Function to create the Imagenet model and load the best weights trainned
 
         Params:
         ------
@@ -183,33 +183,50 @@ def load_new_Resnet50(path):
 
         Returns:
         --------
-        new_Resnet50_model : Keras model
+        Inception_model : Incpetionv3 pretrainned Keras model
     '''
 
     #Create the model according with the definition used in the jupyter notebook
 
-    Resnet50_model = Sequential()
-    Resnet50_model.add(GlobalAveragePooling2D(input_shape=(1, 1, 2048)))
-    Resnet50_model.add(Dropout(0.45))
-    Resnet50_model.add(Dense(256, activation='relu'))
-    Resnet50_model.add(Dropout(0.45))
-    Resnet50_model.add(Dense(133, activation='softmax'))
-    #Resnet50_model.summary()
+    Inception_model = Sequential()
+    Inception_model.add(GlobalAveragePooling2D(input_shape=(5,5,2048))) #Input size according with bottleneck trainning features
+    Inception_model.add(Dropout(0.45))
+    Inception_model.add(Dense(256, activation='relu'))
+    Inception_model.add(Dropout(0.45))
+    Inception_model.add(Dense(133, activation='softmax'))
+    #Inception_model.summary()
 
-    # Load the model weights with the best validation loss.
+    #Load the model with the best weights
 
-    new_Resnet50_model = Resnet50_model.load_weights(path)
-     
+    Inception_model.load_weights(path) 
 
-    return new_Resnet50_model
+    return Inception_model
 
-def Resnet50_predict_breed(img_path, new_Resnet50_model,dog_names):
-    ''' Fucntion to predict the dog breed using the trainned model with Resnet50 and transfer learning
+@st.cache()  #To load the model once
+def extract_Inception_bottleneck():
+
+    ''' Function to extract the InceptionV3 model from keras and generate the bottleneck feature
+       
+        Params: None
+
+        Returns:
+        --------
+        Inception_bottleneck : InceptionV3 keras model with no top layers
+ 
+    '''
+
+    Inception_bottleneck = InceptionV3(weights='imagenet', include_top=False)
+
+    return Inception_bottleneck
+
+def Inception_predict_breed(img_path, Inception_model,dog_names, Inception_bottleneck):
+    
+    ''' Fucntion to predict the dog breed using the trainned model with Inception and transfer learning
 
         Params:
         ---------
         img_path: string, path to the image file
-        new_Resnet50_model: keras model 
+        Inception_model: keras model 
         dog_names: list, list with the dog names
 
         Returns:
@@ -264,7 +281,7 @@ def classify_images(image_path, new_Resnet50_model,dog_names, ResNet50_model):
         image_detected = 'Other'
         
     if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
-        breed_detected = Resnet50_predict_breed(image_path, new_Resnet50_model,dog_names)
+        breed_detected = Resnet50_predict_breed(image_path, new_Resnet50_model, dog_names)
     else:
         breed_detected = 'None'
     
