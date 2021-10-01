@@ -3,10 +3,8 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  25 Set 2021
+# REVISED DATE :  29 Set 2021
 # PURPOSE: Create a program with utils fuctions to be used in the main program app.py to classify Dogs breeds
-
-
 
 # Imports python modules
 
@@ -15,7 +13,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-import io
+import json
 from PIL import Image
 import sys
 from keras.preprocessing import image  
@@ -48,6 +46,27 @@ def only_image_files(files):
 
     return img_files
 
+@st.cache()
+def load_dog_names(path):
+    ''' Fucntion to load the dog names from a json file
+
+        Params:
+        -------
+        path: string, path to the json file with the dog names
+
+        Returns:
+        --------
+        dog_names : list , list with the dog names
+    '''
+
+    f = open (path, "r")
+ 
+     # Reading from file
+    dog_names = json.loads(f.read())
+ 
+    f.close()
+
+    return dog_names
 
 def file_selector(folder_path):
 
