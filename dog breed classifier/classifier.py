@@ -16,7 +16,6 @@
 # Imports python modules
 
 import streamlit as st
-import pandas as pd
 import numpy as np
 import os
 from PIL import Image
@@ -240,7 +239,7 @@ def Inception_predict_breed(img_path, Inception_model,dog_names, Inception_bottl
     predicted_vector = Inception_model.predict(bottleneck_feature)
     # return dog breed that is predicted by the model
     dog_name = dog_names[np.argmax(predicted_vector)].split('/')[2]
-  
+    dog_name = dog_name.split('.')[1]
     return dog_name 
 
 def classify_images(image_path, ResNet50_model):
