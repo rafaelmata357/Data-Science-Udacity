@@ -10,15 +10,13 @@
 
 
 import streamlit as st
-import pandas as pd
 import numpy as np
 import os
 import json
 from PIL import Image
 import sys
-from keras.preprocessing import image  
-import keras    
-import cv2   
+   
+ 
 
 
 def only_image_files(files):
@@ -108,7 +106,7 @@ def display_image(filename):
     None
     '''
 
-    col0,col1, col2, col3 = st.beta_columns([1,1,6,1])
+    col0,col1, col2, col3 = st.beta_columns([1,1,3,3])
     img = Image.open(filename)
     with col0:
             st.write('')
@@ -120,4 +118,4 @@ def display_image(filename):
         img, caption=f"Processed image", width= 400) #use_column_width=True)
         
 
-    return None
+    return col2, col3
