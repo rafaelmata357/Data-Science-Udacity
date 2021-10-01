@@ -54,34 +54,42 @@ def main():
 
     st.write(tiempo())
     
-    ResNet50_model = import_resnet50_model() # import ResNet 50 pretrainned model with transfer learning
-    path_save_weights = 'saved_models/weights.best.Resnet50.hdf5' # Path to the best weights Resnet 50 model trainned
-    new_Resnet50_model = load_new_Resnet50(path_save_weights)
+    # Load the ResNet50 Model and Inceptionv3 models
+    ResNet50_model = import_resnet50_model() 
+    path_save_weights = 'saved_models/weights.best.Inception.hdf5' # Path to the best weights Inception model trainned
+    Inception_model = load_Inception_model(path_save_weights)
+    Inception_bottleneck = extract_Inception_bottleneck()
 
+    # Load dog names list
     dog_names_path = 'dog_names.json'
     dog_names = load_dog_names(dog_names_path)
 
-    folderPath = st.text_input('Enter folder path:')
+    folderPath = st.text_input('Enter images folder path:')
     
     if folderPath:    
         filename, valid_file = file_selector(folderPath)
         if valid_file:
-            #st.write(filename)
-            display_image(filename)
-            st.write('Procesing Image.... {}'.format(filename.split('/')[-1]))
+            
+            
+            col2, col3 = display_image(filename)
            
-            image_detected, breed_detected  = classify_images(filename, new_Resnet50_model, dog_names, ResNet50_model)
-            st.subheader('Classifier Results: {}'.format(image_detected))
-            scale = 1.35
-            minNeighbors = 4 
-            face_detected, face_image = face_detector2(filename, scale, minNeighbors)
-            if face_detected:
-                st.image(face_image, caption=f"Processed image", width= 400)
+            image_detected  = classify_images(filename,  ResNet50_model)
+            
+            with col3:
+                st.subheader('Classifier Results: {}'.format(image_detected))
+         
 
-            if dog_detector(filename,ResNet50_model):
-                st.write('Guato detectado...')
+            #------
+
+            if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
+                breed_detected = Inception_predict_breed(filename, Inception_model,dog_names, Inception_bottleneck)
+            else:
+                breed_detected = 'None'
+            with col3:
+                st.subheader('Possible breeed: {}'.format(breed_detected))
          
     return None    
 
 # Call the main program
-main()
+if __name__ == '__main__':
+    main()
