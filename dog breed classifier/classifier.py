@@ -68,7 +68,7 @@ def classify_human(image):
     return cv_rgb
 
 
-def face_detector2(img_path, scale, minNeighbors):
+def face_detector2(img_path, scale, minNeighbors, image):
     
     ''' Algorithm to detect faces using Open Cv library
     
@@ -77,6 +77,7 @@ def face_detector2(img_path, scale, minNeighbors):
         img_path : string, path to the image file
         scale: float, scale parameter to zoom out the image by this factor
         minNeighbors: int, cadidate rectangles to found the face
+        image: boolean, to return the image with a rectangle
                
         Returns:
         --------
@@ -104,8 +105,10 @@ def face_detector2(img_path, scale, minNeighbors):
             # display the image, along with bounding box
                
   
-
-    return len(faces) > 0
+    if image:
+        return cv_rgb
+    else:
+        return len(faces) > 0
 
 
 @st.cache()  #To load the model once
@@ -266,7 +269,7 @@ def classify_images(image_path, ResNet50_model):
         
     '''
     
-    show_image = False
+
     scale = 1.35
     minNeighbors = 4
     
@@ -276,7 +279,7 @@ def classify_images(image_path, ResNet50_model):
     
     if dog_detector(image_path, ResNet50_model):                                   # Try to detect a Dog
         image_detected = 'Dog'
-    elif face_detector2(image_path, scale, minNeighbors):  # Try to detect a human face
+    elif face_detector2(image_path, scale, minNeighbors, False):  # Try to detect a human face
         image_detected = 'Human'
     else:
         image_detected = 'Other'
