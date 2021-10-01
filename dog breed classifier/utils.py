@@ -44,7 +44,7 @@ def only_image_files(files):
             if ext in ['png','jpg','jpeg']:
                 img_files.append(file)
 
-    return img_files
+    return img_files.sort()
 
 @st.cache()
 def load_dog_names(path):
