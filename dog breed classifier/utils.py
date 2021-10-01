@@ -44,7 +44,8 @@ def only_image_files(files):
             if ext in ['png','jpg','jpeg']:
                 img_files.append(file)
 
-    return img_files.sort()
+    img_files.sort()
+    return img_files
 
 @st.cache()
 def load_dog_names(path):
@@ -86,6 +87,7 @@ def file_selector(folder_path):
     valid_file = False
     try:
         filenames = ['<select>'] + only_image_files(os.listdir(folder_path))
+       
         selected_filename = st.selectbox('Select an image file', filenames, index=0)
         valid_file = True
         if selected_filename == '<select>':
