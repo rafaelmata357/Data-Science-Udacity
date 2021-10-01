@@ -71,14 +71,19 @@ def main():
         if valid_file:
             
             
-            col2, col3 = display_image(filename)
+            col2, col3, imageLocation = display_image(filename)
            
             image_detected  = classify_images(filename,  ResNet50_model)
             
             with col3:
                 st.subheader('Classifier Results: {}'.format(image_detected))
          
-
+            if image_detected == 'Human':
+                scale = 1.35
+                minNeighbors = 4
+                human_face_img = face_detector2(filename, scale, minNeighbors, True)
+                with col2:
+                    imageLocation.image(human_face_img, caption=f"Processed image", width= 400)
             #------
 
             if image_detected == 'Human' or image_detected == 'Dog':   # Try to indetify the Dog breed
@@ -86,7 +91,7 @@ def main():
             else:
                 breed_detected = 'None'
             with col3:
-                st.subheader('Possible breeed: {}'.format(breed_detected))
+                st.subheader('Possible Dog breed: {}'.format(breed_detected))
          
     return None    
 
