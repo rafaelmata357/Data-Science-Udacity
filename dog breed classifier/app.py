@@ -17,7 +17,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-import io
+
 from PIL import Image
 import sys
 from keras.preprocessing import image  
@@ -44,15 +44,32 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
         )
-    st.title('      Dog Breed Classifier')
+    #st.title('      Dog Breed Classifier')
+
     
-    st.sidebar.title('App Description')
+    text1 = 'Image Classifier '
+    text2 = 'App Description'
+    html_temp = f"""
+    <div style = "background.color:#0377fc  ; padding:10px">
+    <h2 style = "color:white; text_align:center;"> {text1} </h2>
+    </div> """
+    # <p style = "color:white; text_align:center;"> {text2} </p>
+    st.markdown(html_temp, unsafe_allow_html = True)
+
+    html_temp2 = f"""
+    <div style = "background.color:#0377fc  ; padding:16px">
+    <h2 style = "color:white; text_align:center;"> {text2} </h2>
+    </div> """
+      
+    st.sidebar.markdown(html_temp2, unsafe_allow_html = True)
+    #st.sidebar.title('App Description')
+    st.sidebar.markdown('')
     st.sidebar.markdown('This is an App to classify Human Faces and Dog breeds using **Convolutional Neural Networks**')
     st.sidebar.markdown('As part of the final project for [Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity')
     st.sidebar.markdown('The complete Github repo can be found in [Github](https://github.com/rafaelmata357/Data-Science-Udacity/tree/master/dog%20breed%20classifier)')
-    st.sidebar.markdown('[![An old rock in the desert](./linkedinlogo.png)](www.nacion.com)')
-
-    st.write(tiempo())
+    st.sidebar.markdown('[![An old rock in the desert](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dashboard/covidapp/static/img/githublogo.png)](www.nacion.com)')
+    st.sidebar.markdown("[![Foo](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dashboard/covidapp/static/img/githublogo.png)](http://google.com.au/)")
+   
     
     # Load the ResNet50 Model and Inceptionv3 models
     ResNet50_model = import_resnet50_model() 
@@ -92,7 +109,13 @@ def main():
                 breed_detected = 'None'
             with col3:
                 st.subheader('Possible Dog breed: {}'.format(breed_detected))
-         
+    
+   
+  
+    html_temp2 = f"""
+         <div style = "background.color:#0377fc  ; padding:2px">
+       </div>"""
+    st.markdown(html_temp2, unsafe_allow_html = True)    
     return None    
 
 # Call the main program
