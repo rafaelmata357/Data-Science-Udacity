@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  29 Set 2021
+# REVISED DATE :  06 Oct 2021
 # PURPOSE: Create a program to classify Dog breeds and human faces with a web interface where users can choose the image 
 #          
 # 
