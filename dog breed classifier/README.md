@@ -98,6 +98,13 @@ The dog images sizes have a right skew distribution with 4% of the files bigger 
 
 ## Methodology
 
+```
+import streamlit as st
+import pandas as pd
+import numpy as np
+import os
+```
+
 ### Data Preprocessing
 
 ---
