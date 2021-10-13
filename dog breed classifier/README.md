@@ -136,6 +136,11 @@ human_files = np.array(glob("../../../data/lfw/*/*"))
 
 ### Implementation
 
+
+This the general flowchart for the program to be implemented, following will be explained the impletation of the different algorithms and models
+
+![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow%20chart.png)
+
 ---
 
 ### Refinement
