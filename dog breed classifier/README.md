@@ -81,12 +81,59 @@ The average breeds sample size is between 60 to 70 images per dog, there is top 
 
 ---
 
-These are the top breed samples       These are the lower breed samples
+These are the top breed samples                     These are the lower breed samples
 
-![Top breeds](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/top_samples.png)                                       ![Lower breed samples](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/low_samples.png)
+![Top breeds](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/top_samples.png)
+```
+```
+
+![Lower breed samples](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/low_samples.png)
 
 ---
 
 ![File size distribution](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/File_size_distribution.png)
 
 The dog images sizes have a right skew distribution with 4% of the files bigger than 400K Bytes, the human files have a normal distribution
+
+
+## Methodology
+
+### Data Preprocessing
+
+---
+
+### Implementation
+
+---
+
+### Refinement
+
+---
+
+## Results
+
+---
+
+### Model Evaluation and Validation
+
+---
+
+### Justification
+
+---
+
+## Conclusion
+
+### Reflection
+
+---
+
+### Improvement
+
+---
+
+[ ]:
+
+```
+
+```
