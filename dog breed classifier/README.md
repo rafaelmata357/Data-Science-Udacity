@@ -46,6 +46,8 @@ In classification problem we have different results:
 
 Due to the datastet characteristics I will use **accuracy** which is one of the most common evaluation metrics, accuracy is very useful when the target class is balanced, that is the total number of correct predictions (True Positives) divided by the total number of predictions made for a dataset.
 
+![Accuracy](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/accuracy.png)
+
 The CNN must attain at least **60%** accuracy on the test set.
 
 ## Analysis
