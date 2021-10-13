@@ -58,11 +58,19 @@ The CNN must attain at least **60%** accuracy on the test set.
 
 There are two datasets available to solve this problem
 
-* A dataset with 8351 dog images and 133 breeds
-* A dataset with 13233 human face images
+There are two datasets available to solve this problem
+
+- A dataset with 8351 dog images and 133 breeds
+- A dataset with 13233 human face images
 
 All the images are in jpg format
 
-The average size of the images is 138351 bytes The minimum size is 4362 bytes The maximun size is 7389073 bytes The average pixel color Nan values 0
+Due to the nature of the dataset there is not Nan values
+
+These are some statistics about the datasets
+
+![Dataset stats](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/dataset_characteristics.png)
+
+
 
 ### Data visualization[¶](http://localhost:8888/lab#Data-visualization)
