@@ -81,13 +81,9 @@ The average breeds sample size is between 60 to 70 images per dog, there is top 
 
 ---
 
-These are the top breed samples                     These are the lower breed samples
+![Lower breed samples](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Low%20breed%20chart.png)
 
-![Top breeds](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/top_samples.png)
-```
-```
-
-![Lower breed samples](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/low_samples.png)
+![Top breeds](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Top%20breed%20chart.png)
 
 ---
 
@@ -98,14 +94,38 @@ The dog images sizes have a right skew distribution with 4% of the files bigger 
 
 ## Methodology
 
+### Data Preprocessing
+
+
+The images dataset are loaded through the use of the load_files function from the scikit-learn library and different and different variables for the models are generated
+
+* `train_files`, `valid_files`, `test_files` - numpy arrays containing file paths to images
+* `train_targets`, `valid_targets`, `test_targets` - numpy arrays containing onehot-encoded classification labels
+* `dog_names` - list of string-valued dog breed names for translating labels
+
 ```
-import streamlit as st
-import pandas as pd
-import numpy as np
-import os
+def load_dataset(path):
+    """ Function to load the images and generate different variables
+
+        Params:
+        path : str, path to the images
+
+        Returns:
+        dog_files, dog_targes : numpy array with the files names and the encoded targets
+    data = load_files(path)
+    dog_files = np.array(data['filenames'])
+    dog_targets = np_utils.to_categorical(np.array(data['target']), 133)
+    return dog_files, dog_targets
 ```
 
-### Data Preprocessing
+The dog dataset is splitted in three groups to train, validate and test the different models
+
+The human dataset is loaded using the same glob function
+
+```
+human_files = np.array(glob("../../../data/lfw/*/*"))
+```
+
 
 ---
 
