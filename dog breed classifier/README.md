@@ -6,7 +6,7 @@ Image classification is an important task nowadays, plays an important role for 
 
 But categorizing and assigning labels to image is not a simple task for computers, with the advance in Artificial Intelligence, machine learning and image datasets available to train different type of neural neural networks, now is possible to achive acceptable results in image classification.
 
-As part of the final capstone Udacity Data science nanodegree, in this project different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
+As part of the final capstone project for Udacity Data science nanodegree,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
 
 As a final product a web app is deployed putting together a series of models to perform different tasks.
 
@@ -140,6 +140,26 @@ human_files = np.array(glob("../../../data/lfw/*/*"))
 This the general flowchart for the program to be implemented, following will be explained the impletation of the different algorithms and models
 
 ![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow%20chart.png)
+
+
+
+### **Classifying human faces using OpenCV framework**
+
+OpenCV's implementation of Haar feature-based cascade classifiers is used to detect human faces in images. OpenCV provides many pre-trained face detectors.
+
+```
+# extract pre-trained face detector
+face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
+
+# load color (BGR) image
+img = cv2.imread(human_files[3])
+# convert BGR image to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# find faces in image
+faces = face_cascade.detectMultiScale(gray)
+```
+
 
 ---
 
