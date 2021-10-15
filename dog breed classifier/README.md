@@ -187,13 +187,7 @@ Moreover getting the 4D tensor ready for ResNet-50, and for any other pre-traine
 img = preprocess_input(path_to_tensor(img_path))
 ```
 
-```
-
-```
-
-```
-In addition for the CNN We rescale the images by dividing every pixel in every image by 255.
-```
+In addition for the transfer learning CNN models the images are rescaled dividing every pixel in every image by 255.
 
 ```
 # pre-process the data for Keras
