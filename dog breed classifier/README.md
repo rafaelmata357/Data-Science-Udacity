@@ -133,6 +133,74 @@ The human dataset is loaded using the glob function
 human_files = np.array(glob("../../../data/lfw/*/*"))
 ```
 
+For the OpenCV face detector, it is standard procedure to convert the images to grayscale. The detectMultiScale function executes the classifier stored in face_cascade and takes the grayscale image as a parameter.
+
+```
+# load color (BGR) image
+img = cv2.imread(human_files[3])
+# convert BGR image to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+```
+
+**For the keras CNN models these are the pre-processing steps:**
+
+* Convert the input to a 4D tensor, with shape (nb_samples,rows,columns,channels),
+  * nb_samples corresponds to the total number of images (or samples)
+  * rows, columns, and channels correspond to the number of rows, columns, and channels for each image.
+* The path_to_tensor function below takes a string-valued file path to a color image as input and returns a 4D tensor suitable for supplying to a Keras CNN.
+* The function first loads the image and resizes it to a square image that is 224×224 pixels.
+* Next, the image is converted to an array, which is then resized to a 4D tensor.
+* In this case, since we are working with color images, each image has three channels, the returned tensor will always have shape (1,224,224,3).
+* nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
+
+```
+from keras.preprocessing import image                
+from tqdm import tqdm
+
+def path_to_tensor(img_path):
+
+    """ Function that takes a numpy array of string-valued image paths as input and returns a 4D tensor
+
+        Params:
+        img_path: string, path to the image
+
+        Returns
+        4D tensor with shape 1, 224, 224, 3)
+
+    # loads RGB image as PIL.Image.Image type
+    img = image.load_img(img_path, target_size=(224, 224))
+
+    # convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)
+    x = image.img_to_array(img)
+
+    # convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor
+    return np.expand_dims(x, axis=0)
+
+def paths_to_tensor(img_paths):
+    list_of_tensors = [path_to_tensor(img_path) for img_path in tqdm(img_paths)]
+    return np.vstack(list_of_tensors)
+```
+
+Moreover getting the 4D tensor ready for ResNet-50, and for any other pre-trained model in Keras, requires some additional processing. First, the RGB image is converted to BGR by reordering the channels and All pre-trained models have the additional normalization step that the mean pixel, This is implemented in the imported function **preprocess_input**
+
+```
+img = preprocess_input(path_to_tensor(img_path))
+```
+
+```
+
+```
+
+```
+In addition for the CNN We rescale the images by dividing every pixel in every image by 255.
+```
+
+```
+# pre-process the data for Keras
+train_tensors = paths_to_tensor(train_files).astype('float32')/255
+valid_tensors = paths_to_tensor(valid_files).astype('float32')/255
+test_tensors = paths_to_tensor(test_files).astype('float32')/255
+```
 
 ### Implementation
 
