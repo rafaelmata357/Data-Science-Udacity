@@ -201,7 +201,8 @@ test_tensors = paths_to_tensor(test_files).astype('float32')/255
 
 This the general flowchart for the program to be implemented, following will be explained the impletation of the different algorithms and models
 
-![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow%20chart.png)
+![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow2.png)
+
 
 
 
