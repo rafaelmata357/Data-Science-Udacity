@@ -225,6 +225,28 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 faces = face_cascade.detectMultiScale(gray)
 ```
 
+Algorithm to detect human faces
+
+```
+# returns "True" if face is detected in image stored at img_path
+def face_detector(img_path):
+    ''' Function to detect is there is a human face in the image
+  
+        Params: img_path, string, path to the image
+    
+        Returns:
+        A boolena variable indicating if a face is detected
+    
+    '''
+    img = cv2.imread(img_path)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray)
+    
+    return len(faces) > 0
+
+```
+
+
 ---
 
 ### Refinement
@@ -256,5 +278,24 @@ faces = face_cascade.detectMultiScale(gray)
 [ ]:
 
 ```
+
+```
+
+```
+# returns "True" if face is detected in image stored at img_path
+def face_detector(img_path):
+    ''' Function to detect is there is a human face in the image
+  
+        Params: img_path, string, path to the image
+    
+        Returns:
+        A boolena variable indicating if a face is detected
+    
+    '''
+    img = cv2.imread(img_path)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray)
+    
+    return len(faces) > 0
 
 ```
