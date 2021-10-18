@@ -306,10 +306,11 @@ The algorithm is tested with the two datasets (human faces images and dog images
 Three different CNN models are created using Keras:
 
 * A model from Scratch
-* With transfer learning using VGG16 model
-* With transfer learning using Inception V3 model
+* With transfer learning
+  * VGG16 model
+  * Inception V3 model
 
-**All the models created follows this methodology:**
+**All the models created follow this methodology:**
 
 * Pre process the data
 * Create the model
@@ -329,8 +330,7 @@ Three different CNN models are created using Keras:
 * Test the model
 * Evaluate model performance with the accuracy metrics
 
-
-**A CNN model from scratch**
+### A CNN model from scratch
 
 In this model a CNN is created using a combination of different convolutional layers, filters, dropout and dense layers
 
@@ -364,6 +364,79 @@ model.summary()
 ```
 
 ![Scratch model architecture](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Scratch%20model%20architecture.png)
+
+**Compile the model**
+
+The model is compiled using the following parameters:
+
+* optimizer = rmsprop
+* loss = categorical_crossentropy
+* metrics = accuracy
+
+```
+model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+```
+
+**Train the model**
+
+Using the train and validation images the model is train and validated, using 20 epochs and a batchsize of 20
+
+```
+from keras.callbacks import ModelCheckpoint  
+
+epochs = 20
+
+checkpointer = ModelCheckpoint(filepath='saved_models/weights.best.from_scratch.hdf5', 
+                               verbose=1, save_best_only=True)
+
+model.fit(train_tensors, train_targets, 
+          validation_data=(valid_tensors, valid_targets),
+          epochs=epochs, batch_size=20, callbacks=[checkpointer], verbose=1)
+```
+
+**Load the model**
+
+```
+model.load_weights('saved_models/weights.best.from_scratch.hdf5')
+```
+
+**Test the model**
+
+```
+# get index of predicted dog breed for each image in test set
+dog_breed_predictions = [np.argmax(model.predict(np.expand_dims(tensor, axis=0))) for tensor in test_tensors]
+
+# report test accuracy
+test_accuracy = 100*np.sum(np.array(dog_breed_predictions)==np.argmax(test_targets, axis=1))/len(dog_breed_predictions)
+print('Test accuracy: %.4f%%' % test_accuracy)
+```
+
+After testing this model we get this performace:
+
+* Test accuracy: **18.1818%**
+
+### VGG16 model with transfer learning
+
+```
+To reduce training time without sacrificing accuracy, transfer learning is used. 
+```
+
+Obtain bottleneck features
+
+```
+bottleneck_features = np.load('bottleneck_features/DogVGG16Data.npz')
+train_VGG16 = bottleneck_features['train']
+valid_VGG16 = bottleneck_features['valid']
+test_VGG16 = bottleneck_features['test']
+```
+
+From here all the steps are similar to the scrath model we described before
+
+Model Architecture
+
+The model uses the the pre-trained VGG-16 model, the last convolutional output of VGG-16 is fed as input to the model. A global average pooling layer and a fully connected layer is added, where the latter contains one node for each dog category equipped with a softmax function to predict the dog probability.
+
+![VGG16 Model](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/VGG16%20model.png)
 
 
 
