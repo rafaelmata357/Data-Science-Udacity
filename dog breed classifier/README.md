@@ -249,13 +249,13 @@ def face_detector(img_path):
 
 The algorithm is tested with the two datasets (human faces images and dog images) and 100 random images, these are the results:
 
-- Peformace of faces detected in the human files: 100.00%
-- Peformace of faces detected in the dog files: 11.00%
+- Peformace of faces detected in the human files: **100.00%**
+- Peformace of faces detected in the dog files: **11.00%**
 
 
 ### Detecting dogs using a pre-trained ResNet-50 model
 
-Resnet have been trained on ImageNet, a very large and popular dataset used for image classification and other vision tasks. ImageNet contains over 10 million images with 1000 different categories. Given an image, this pre-trained ResNet-50 model returns a prediction from the available categories in ImageNet.
+The Resnet have been trained on ImageNet, a very large and popular dataset used for image classification and other vision tasks. ImageNet contains over 10 million images with 1000 different categories. Given an image, this pre-trained ResNet-50 model returns a prediction from the available categories in ImageNet.
 
 First, the model is downloaded with weights that have been trained on ImageNet
 
