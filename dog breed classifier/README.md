@@ -149,7 +149,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 * nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
 
 ```
-from keras.preprocessing import image              
+from keras.preprocessing import image            
 from tqdm import tqdm
 
 def path_to_tensor(img_path):
@@ -207,7 +207,6 @@ This the general flowchart for the program to be implemented, following will be 
 - CNN with transfer learning to classify dog breeds
 ```
 
-
 ### **Classifying human faces using OpenCV framework**
 
 OpenCV's implementation of Haar feature-based cascade classifiers is used to detect human faces in images. OpenCV provides many pre-trained face detectors.
@@ -233,25 +232,23 @@ def face_detector(img_path):
     ''' Function to detect is there is a human face in the image
   
         Params: img_path, string, path to the image
-    
+  
         Returns:
         A boolena variable indicating if a face is detected
-    
+  
     '''
     img = cv2.imread(img_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray)
-    
+  
     return len(faces) > 0
 
 ```
-
 
 The algorithm is tested with the two datasets (human faces images and dog images) and 100 random images, these are the results:
 
 - Peformace of faces detected in the human files: **100.00%**
 - Peformace of faces detected in the dog files: **11.00%**
-
 
 ### Detecting dogs using a pre-trained ResNet-50 model
 
@@ -265,41 +262,6 @@ from keras.applications.resnet50 import ResNet50
 # define ResNet50 model
 ResNet50_model = ResNet50(weights='imagenet')
 ```
-
-**Making Predictions with ResNet-50**
-
-Once the image is formatted, it is supplied to the Resnet-50 model and extract the predictions, this is accomplished using the `predict` method, which returns an array whose **𝑖**i-th entry is the model's predicted probability that the image belongs to the **𝑖**i-th ImageNet category.
-
-By taking the argmax of the predicted probability vector, we obtain an integer corresponding to the model's predicted object class, which we can identify with an object category through the use of this [dictionary](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a).
-
-This is implemented in the `ResNet50_predict_labels` function below.
-
-```
-from keras.applications.resnet50 import preprocess_input, decode_predictions
-
-def ResNet50_predict_labels(img_path):
-    # returns prediction vector for image located at img_path
-    img = preprocess_input(path_to_tensor(img_path))
-    return np.argmax(ResNet50_model.predict(img))
-```
-
-
-A dog detector is written using the `ResNet50_predict_labels` based on the range 151 to 268 which are the dog categories
-
-def dog_detector(img_path): ''' Function thatreturns "True" if a dog is detected in the image stored at img_path
-
-```
-Params:
-img_path, sting, path to the images
-
-Returns:
-A boolen variable if a dog is detected or not
-'''
-
-prediction = ResNet50_predict_labels(img_path)
-return ((prediction <= 268) & (prediction >= 151))
-```
-
 
 **Making Predictions with ResNet-50**
 
@@ -339,7 +301,6 @@ The algorithm is tested with the two datasets (human faces images and dog images
 * Peformace of dogs detected in the human files: **0.00%**
 * Peformace of dogs detected in the dog files: **100.00%**
 
-
 ### Refinement
 
 ---
@@ -378,15 +339,15 @@ def face_detector(img_path):
     ''' Function to detect is there is a human face in the image
   
         Params: img_path, string, path to the image
-    
+  
         Returns:
         A boolena variable indicating if a face is detected
-    
+  
     '''
     img = cv2.imread(img_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray)
-    
+  
     return len(faces) > 0
 
 ```
