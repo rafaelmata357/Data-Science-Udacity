@@ -71,8 +71,6 @@ These are some statistics about the datasets
 
 ![Dataset stats](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/dataset_characteristics.png)
 
-
-
 ### Data visualization[¶](http://localhost:8888/lab#Data-visualization)
 
 ![Image file sample distribution](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/sample_distribution.png)
@@ -95,18 +93,15 @@ Distribution of the file sizes in the two samples
 
 The dog images sizes have a right skew distribution with 4% of the files bigger than 400K Bytes, the human files have a normal distribution
 
-
 ## Methodology
 
 ### Data Preprocessing
-
 
 The images dataset are loaded through the use of the load_files function from the scikit-learn library and different and different variables for the models are generated
 
 * `train_files`, `valid_files`, `test_files` - numpy arrays containing file paths to images
 * `train_targets`, `valid_targets`, `test_targets` - numpy arrays containing onehot-encoded classification labels
 * `dog_names` - list of string-valued dog breed names for translating labels
-
 
 ```
 def load_dataset(path):
@@ -154,7 +149,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 * nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
 
 ```
-from keras.preprocessing import image                
+from keras.preprocessing import image              
 from tqdm import tqdm
 
 def path_to_tensor(img_path):
@@ -196,14 +191,21 @@ valid_tensors = paths_to_tensor(valid_files).astype('float32')/255
 test_tensors = paths_to_tensor(test_files).astype('float32')/255
 ```
 
-### Implementation
+---
 
+# Implementation
 
 This the general flowchart for the program to be implemented, following will be explained the impletation of the different algorithms and models
 
 ![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow2.png)
 
+**Three computer methods are used to solve this problem:**
 
+```
+- OpenCV framework to recognize a human face
+- A pre-trained ResNet-50 model to detect dogs
+- CNN with transfer learning to classify dog breeds
+```
 
 
 ### **Classifying human faces using OpenCV framework**
@@ -222,7 +224,6 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # find faces in image
 faces = face_cascade.detectMultiScale(gray)
 ```
-
 
 ---
 
