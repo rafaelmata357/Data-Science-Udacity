@@ -247,7 +247,43 @@ def face_detector(img_path):
 ```
 
 
----
+The algorithm is tested with the two datasets (human faces images and dog images) and 100 random images, these are the results:
+
+- Peformace of faces detected in the human files: 100.00%
+- Peformace of faces detected in the dog files: 11.00%
+
+
+### Detecting dogs using a pre-trained ResNet-50 model
+
+Resnet have been trained on ImageNet, a very large and popular dataset used for image classification and other vision tasks. ImageNet contains over 10 million images with 1000 different categories. Given an image, this pre-trained ResNet-50 model returns a prediction from the available categories in ImageNet.
+
+First, the model is downloaded with weights that have been trained on ImageNet
+
+```
+from keras.applications.resnet50 import ResNet50
+
+# define ResNet50 model
+ResNet50_model = ResNet50(weights='imagenet')
+```
+
+**Making Predictions with ResNet-50**
+
+Once the image is formatted is supplied to the Resnet-50 model and extract the predictions, this is accomplished using the `predict` method, which returns an array whose **𝑖**i-th entry is the model's predicted probability that the image belongs to the **𝑖**i-th ImageNet category.
+
+By taking the argmax of the predicted probability vector, we obtain an integer corresponding to the model's predicted object class, which we can identify with an object category through the use of this [dictionary](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a).
+
+This is implemented in the `ResNet50_predict_labels` function below.
+
+```
+from keras.applications.resnet50 import preprocess_input, decode_predictions
+
+def ResNet50_predict_labels(img_path):
+    # returns prediction vector for image located at img_path
+    img = preprocess_input(path_to_tensor(img_path))
+    return np.argmax(ResNet50_model.predict(img))
+```
+
+
 
 ### Refinement
 
