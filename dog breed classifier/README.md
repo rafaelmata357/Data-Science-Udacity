@@ -301,6 +301,34 @@ The algorithm is tested with the two datasets (human faces images and dog images
 * Peformace of dogs detected in the human files: **0.00%**
 * Peformace of dogs detected in the dog files: **100.00%**
 
+### Create a CNN to Classify Dog Breeds using CNN
+
+Three different CNN models are created using Keras:
+
+* A model from Scratch
+* With transfer learning using VGG16 model
+* With transfer learning using Inception V3 model
+
+**All the models created follows this methodology:**
+
+* Pre process the data
+* Create the model
+  * Define the different convolutional layers (Average Pooling, Max Pooling, Conv2D)
+  * Dropouts (define the dropout percentage)
+  * Activation functions (Relu, softmax)
+  * Dense layers (number of nodes)
+* Compile the model
+  * optimizer (rmsprop, adam, sgd)
+  * loss function (categorical_crossentropy)
+  * metrics (accuracy)
+* Train the model
+  * epochs
+  * batch size
+* Save the Model with the Best Validation Loss
+* Load the Model with the Best Validation Loss
+* Test the model
+* Evaluate model performance with the accuracy metrics
+
 ### Refinement
 
 ---
