@@ -329,6 +329,47 @@ Three different CNN models are created using Keras:
 * Test the model
 * Evaluate model performance with the accuracy metrics
 
+
+**A CNN model from scratch**
+
+In this model a CNN is created using a combination of different convolutional layers, filters, dropout and dense layers
+
+```
+from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, AveragePooling2D
+from keras.layers import Dropout, Flatten, Dense
+from keras.models import Sequential
+
+model = Sequential()
+
+### TODO: Define your architecture.
+
+model.add(Conv2D(filters=16, kernel_size=3, padding='same', activation='relu', input_shape=(224, 224, 3)))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=32, kernel_size=2, padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=64, kernel_size=2, padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=128, kernel_size=2, padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=128, kernel_size=2, padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=128, kernel_size=2, padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=2))
+
+model.add(Dropout(0.4))
+model.add(Flatten())
+#model.add(Dense(256, activation='relu'))
+#model.add(Dropout(0.4))
+model.add(Dense(133, activation='softmax'))
+
+model.summary()
+```
+
+```
+![Scratch model architecture](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Scratch%20model%20architecture.png)
+```
+
+
 ### Refinement
 
 ---
