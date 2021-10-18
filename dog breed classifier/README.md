@@ -417,9 +417,7 @@ After testing this model we get this performace:
 
 ### VGG16 model with transfer learning
 
-```
-To reduce training time without sacrificing accuracy, transfer learning is used. 
-```
+Transfer learning is used to reduce training time without sacrificing accuracy
 
 Obtain bottleneck features
 
@@ -438,6 +436,34 @@ The model uses the the pre-trained VGG-16 model, the last convolutional output o
 
 ![VGG16 Model](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/VGG16%20model.png)
 
+After compiling, training and testing the model, the accuracy result is: **18.19%**
+
+
+### Inception V3 model with transfer learning
+
+Another model available in keras is Inception V3, it has 159 layers and an architecture similar like the VGG16 is created to predict the dog breeds
+
+Model architecture
+
+* A global average pooling is added to the last convolutional layer of the inception model
+* Dropout is added to avoid overfitting
+* A dense layer with 256 nodes is added
+* Another dropout is added
+* A final dense layer with the 133 output corresponding to the 133 dog categories and softmax function is added to predict the breeds
+
+```
+Inception_model = Sequential()
+Inception_model.add(GlobalAveragePooling2D(input_shape=train_Inception.shape[1:]))
+Inception_model.add(Dropout(0.45))
+Inception_model.add(Dense(256, activation='relu'))
+Inception_model.add(Dropout(0.45))
+Inception_model.add(Dense(133, activation='softmax'))
+Inception_model.summary()
+```
+
+![Inception Model](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/inception%20model.png)
+
+After training and testing the model, the accuracy is: **80.3828%**
 
 
 ### Refinement
