@@ -468,6 +468,84 @@ After training and testing the model, the accuracy is: **80.3828%**
 
 ### Refinement
 
+Considering the previous results,  two algorithms will be improved:
+
+* OpenCV to classify images
+* Inception V3 to classify dog breeds
+
+```
+
+```
+
+```
+The Dog detector is not optimized because the classifying results is 100%
+```
+
+**OpenCV**
+
+For the face_cascade.detectMultiScale two hyperparameters are tuned to improve the face detection:
+
+* **scaleFactor** that controls how the input image is scaled prior to the detection, the image is scaled up or down, default = 1.1
+* **minNeighbors** determines how robust each detection must be in order to be reported, the default is 3
+
+After testing different values, these ones improve the algorithm accuracy:
+
+* **scaleFactor** = 1.35
+* **minNeighbors** = 4
+
+```
+face_cascade.detectMultiScale(gray,scale,minNeighbors)
+```
+
+**Inception V3**
+
+The model Inception gets the best results with an accuracy of 80.38%, to impreve this model two strategies are used:
+
+* Use different hyperparameters:
+
+  * Optimizer
+  * epochs: [20, 30, 40]
+* Use K-fold Cross Validation
+
+Keras provides different algorithms to optimize the model, three of them are tested to see if the model improves the accuracy:
+
+* adam
+* rmsprop
+* sgd
+
+The optimizer is specified as a parameter when the model is compiled:
+
+```
+model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+```
+
+The optimizer has another hyperparameter like: learning rate, momentum, among others but the default values are used
+
+In addition with these optimizers the model is trained with different epochs [30, 40, 50] to see if a better accuracy is obtained, the epocs are specified when the model is trained:
+
+```
+
+model.fit(inputs[train], targets[train], validation_data=(inputs[validate], targets[validate]), epochs=30, batch_size=25)
+```
+
+**Cross Validation**
+
+The dataset as we saw before in the data visualization part, is not totally balanced, some breeds hava more than 90 samples, and others has less than 40, in this scenario a technique called k-folding cross validation could be used, instead of split the dataset in training and validation fix sets, different sets are splitted to ensure that all the training and validation set are relatively unbiased, when the process finishes the model the model has been trained using most of the images and the model with the best accuracy result is chosen.
+
+The steps to train the model with cross validation are:
+
+* Merge the original training and validation dataset
+  ```
+  inputs = np.concatenate((train_Inception, valid_Inception), axis=0)
+  targets = np.concatenate((train_targets, valid_targets), axis=0)
+  ```
+* Define the K-fold Cross Validator with the number of folds using the sklearn libray
+  ```
+  kfold = KFold(n_splits=num_folds, shuffle=True)
+  ```
+* Follow the steps to create, compile, train and evaluate the model with the different folds
+* Select and save the model with the best weights to get the better accuracy
+
 ---
 
 ## Results
