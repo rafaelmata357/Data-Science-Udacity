@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  06 Oct 2021
+# REVISED DATE :  20 Oct 2021
 # PURPOSE: Create a program to classify Dog breeds and human faces with a web interface where users can choose the image 
 #          
 # 
@@ -24,9 +24,9 @@ from keras.preprocessing import image
 import keras    
 import cv2   
 from utils import *
-from classifier import *
 
-import time
+
+
 
 @st.cache()
 def tiempo():
