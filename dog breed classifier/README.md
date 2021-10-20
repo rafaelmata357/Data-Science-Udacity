@@ -63,7 +63,7 @@ Image classification is an important task nowadays, plays an important role for 
 
 But categorizing and assigning labels to image is not a simple task for computers, with the advance in Artificial Intelligence, machine learning and image datasets available, now is possible to achive acceptable results in image classification.
 
-As part of the final capstone project for `[Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity')` Udacity Data science nanodegree,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
+As part of the final capstone project for [Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
 
 As a final product a web app is deployed putting together a series of models to perform different tasks.
 
