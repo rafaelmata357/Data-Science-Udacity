@@ -149,7 +149,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 * nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
 
 ```
-from keras.preprocessing import image            
+from keras.preprocessing import image      
 from tqdm import tqdm
 
 def path_to_tensor(img_path):
@@ -194,10 +194,6 @@ test_tensors = paths_to_tensor(test_files).astype('float32')/255
 ---
 
 # Implementation
-
-This the general flowchart for the program to be implemented, following will be explained the impletation of the different algorithms and models
-
-![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow2.png)
 
 **Three computer methods are used to solve this problem:**
 
@@ -436,8 +432,7 @@ The model uses the the pre-trained VGG-16 model, the last convolutional output o
 
 ![VGG16 Model](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/VGG16%20model.png)
 
-After compiling, training and testing the model, the accuracy result is: **18.19%**
-
+After compiling, training and testing the model, the accuracy result is: **39.83**%
 
 ### Inception V3 model with transfer learning
 
@@ -465,7 +460,6 @@ Inception_model.summary()
 
 After training and testing the model, the accuracy is: **80.3828%**
 
-
 ## Refinement
 
 Considering the previous results,  two algorithms will be improved:
@@ -473,13 +467,7 @@ Considering the previous results,  two algorithms will be improved:
 * OpenCV to classify images
 * Inception V3 to classify dog breeds
 
-```
-
-```
-
-```
 The Dog detector is not optimized because the classifying results is 100%
-```
 
 **OpenCV**
 
@@ -550,22 +538,74 @@ The steps to train the model with cross validation are:
 
 ## Results
 
----
+These are the results obtained once the refinement is applied to the human face detector and dog breed detector algorithms
 
-### Model Evaluation and Validation
+**OpenCV Algorithm**
 
----
+This is the improvement after changing the default parameters for the face_cascade.detectMultiScale algorithm
+
+![opencv](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/open%20cv%20results.png)
+
+An improvement of 10% is achieved, it means that a dog face is not detected as a human, even though in some dog images there is a human with a dog, this could explain why some human faces are in the dog images
+
+**CNN Model Evaluation and Validation**
+
+This is the performance of the different CNN models
+
+![Models](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/models%20accuracy.png)
+
+The model from scratch has the worst performance, it shows that a simple CNN can not have a good accuracy if its not trainned with enough images and the complexity of the network is increased but this requieres more computational power to trained the network.
+
+For the two models with transfer learning, the Inception model has the best performance, two factors could explain the results:
+
+* The pretrained model performance per se
+* The architecture used on top of the model, where for the Inception model dropout is applied; this avoid overfitting and get better results
+
+Once the Inception model is chosen we try to improve tuning the different hyperparameters (optimizer and epocs), here are accuracy obtained:
+
+![hyperparameter models](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/hyperparameter%20results.png)
+
+From the previous results, the accuracy did not get a good improvement tuning the hyperparameter less than a 2% improvement is achieved across all the possible combinations
+
+From here we select the model with rmsprop and try to improve using k-folding cross validation to train the model with all the possible image combinations, these are the results using a k-fold = **8**
+
+![]()
+
+![Validation](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Validation%20accuracy.png)
+
+The result shows that even though the dog image data set is not equally distributed, when trainning the model with different sample distributions the accuracy did not get a big improve, all the results are around 2% margin.
+
+Applying the model with the best validation scores to the test set, the final result for the accuracy is:  **82.10** , which is very similar to the previous results, so the dataset is very stable to train the model, but to improve the results different approaches must be taken and further investigation is needed.
 
 ### Justification
+
+The models with the best scores are selected to create the web app, so this are the models selected:
+
+* To classify images: **face_cascade.detectMultiScale** with the tune parameters
+* To classify dogs: **pre-trained ResNet-50**
+* to classify dog breed: **Inception V3 model**
+
+---
+
+## Web app
+
+A web app is created using the [Streamlit](https://streamlit.io/) framework, an easy way to build interactive data apps, and integrated all the models with the best results.
+
+This is the general flowchart for the algorith used in the webapp:
+
+![General Algorithm](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Flow2.png)
+
+This is how the web app looks like:
+
+![Web app](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/web%20app.png)
 
 ---
 
 ## Conclusion
 
-### Reflection
-
----
-
-### Improvement
+* CNN is an efficient computer algorithm  to classify images and detect different features, but doing a CNN from scratch requires a lot of time and power  to get an acceptable accuracy
+* Using transfer learning improves a lot a image classifier and reduce the training time required to get better results
+* Different image scenarios using can be added to generalize the app functionality and detect other images or combinations like dog and human in the same picture or other kind of images like cats.
+* Looking forward to improve the accuracy other techniques can be used like image augmentation could be used to improve the model accuracy
 
 ---
