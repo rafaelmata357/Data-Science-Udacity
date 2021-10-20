@@ -17,7 +17,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-
 from PIL import Image
 import sys
 from keras.preprocessing import image  
@@ -26,11 +25,6 @@ import cv2
 from utils import *
 
 
-
-
-@st.cache()
-def tiempo():
-    return time.ctime()
 
 def main():
 
@@ -67,8 +61,6 @@ def main():
     st.sidebar.markdown('This is an App to classify Human Faces and Dog breeds using **Convolutional Neural Networks**')
     st.sidebar.markdown('As part of the final project for [Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity')
     st.sidebar.markdown('The complete Github repo can be found in [Github](https://github.com/rafaelmata357/Data-Science-Udacity/tree/master/dog%20breed%20classifier)')
-    st.sidebar.markdown('[![An old rock in the desert](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dashboard/covidapp/static/img/githublogo.png)](www.nacion.com)')
-    st.sidebar.markdown("[![Foo](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dashboard/covidapp/static/img/githublogo.png)](http://google.com.au/)")
    
     
     # Load the ResNet50 Model and Inceptionv3 models
