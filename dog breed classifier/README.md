@@ -1,5 +1,60 @@
 # Dog breed classifier using CNN
 
+## Installation
+
+gh repo clone rafaelmata357/Data-Science-Udacity/dog breed classifier
+
+## Libraries used
+
+* streamlit
+
+* numpy
+* os
+* PIL
+* sys
+* keras
+* cv2
+* sklearn
+* json
+
+The libraries details can be found in the requirements.txt file
+
+## Files in the repository
+
+**/haarcascade/haarcascade_frontalface_alt.xml** xml file with the pre-trained face detectors
+
+**/saved_models/weights.best.Inception.hdf5** best weights for the inception model
+
+**/test_images** Images used to thes the classifier
+
+**app.py** the main progran with the web app
+
+**utils.py** Utilities scripts used in the app
+
+**classifier.py** CNN models to classify the images used in the web app
+
+**dog_app.ipynb** Jupyter notebook used to train and test the different models
+
+**inception.ipynb** Jupyter notebook used to improve the Inception model
+
+**dogs.json** Json file with the dog breeds
+
+**requirements.txt** Required libraries to use the web app
+
+**Readme.md** This file
+
+
+## How to interact with the project
+
+
+From the repository root directory, run the following command:
+
+```
+ $streamlit run app.py
+```
+
+This launch the web app, where the user can interact and test with different images
+
 ## Project Overview
 
 Image classification is an important task nowadays, plays an important role for various applications from the automobile industry, medical analysis, security, automated perception in robots, among others use cases.
@@ -606,6 +661,17 @@ This is how the web app looks like:
 * CNN is an efficient computer algorithm  to classify images and detect different features, but doing a CNN from scratch requires a lot of time and power  to get an acceptable accuracy
 * Using transfer learning improves a lot a image classifier and reduce the training time required to get better results
 * Different image scenarios using can be added to generalize the app functionality and detect other images or combinations like dog and human in the same picture or other kind of images like cats.
-* Looking forward to improve the accuracy other techniques can be used like image augmentation could be used to improve the model accuracy
+* Looking forward to improve the accuracy other techniques can be used like image augmentation
+* A web app is a good form to integrate the different models and make it available to the final user
+
+
+## Acknowledgements
+
+The completion of this project was done thanks to the support of the Udacity team and instructors, the initial Jupyter notebook guide was key to develop and complete the project.
+
+## License
+
+The code follows this license: [https://creativecommons.org/licenses/by/3.0/us/](https://creativecommons.org/licenses/by/3.0/us/)
+
 
 ---
