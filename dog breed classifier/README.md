@@ -35,7 +35,7 @@ The libraries details can be found in the requirements.txt file
 
 **dog_app.ipynb** Jupyter notebook used to train and test the different models
 
-**inception.ipynb** Jupyter notebook used to improve the Inception model
+**Inception_fine_tuning.ipynb** Jupyter notebook used to improve the Inception model
 
 **dogs.json** Json file with the dog breeds
 
@@ -53,7 +53,7 @@ From the repository root directory, run the following command:
  $streamlit run app.py
 ```
 
-This launch the web app, where the user can interact and test with different images
+This launch the web app on the local machine, where the user can interact and test with different images
 
 ## Project Overview
 
@@ -295,6 +295,12 @@ def face_detector(img_path):
     return len(faces) > 0
 
 ```
+
+
+
+This algoritmn can also make a rectangle showing the face detected
+
+![face](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/hilary.png)
 
 The algorithm is tested with the two datasets (human faces images and dog images) and 100 random images, these are the results:
 
