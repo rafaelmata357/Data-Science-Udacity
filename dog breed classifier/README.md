@@ -61,7 +61,7 @@ This launch the web app on the local machine, where the user can interact and te
 
 Image classification is an important task nowadays, plays an important role for various applications from the automobile industry, medical analysis, security, automated perception in robots, among others use cases.
 
-But categorizing and assigning labels to image is not a simple task for computers, with the advance in Artificial Intelligence, machine learning and image datasets available to train different type of neural neural networks, now is possible to achive acceptable results in image classification.
+But categorizing and assigning labels to image is not a simple task for computers, with the advance in Artificial Intelligence, machine learning and image datasets available, now is possible to achive acceptable results in image classification.
 
 As part of the final capstone project for Udacity Data science nanodegree,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
 
