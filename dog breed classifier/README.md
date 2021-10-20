@@ -466,7 +466,7 @@ Inception_model.summary()
 After training and testing the model, the accuracy is: **80.3828%**
 
 
-### Refinement
+## Refinement
 
 Considering the previous results,  two algorithms will be improved:
 
