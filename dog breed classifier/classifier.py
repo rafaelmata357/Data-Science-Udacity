@@ -3,7 +3,7 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  08 Oct 2021
+# REVISED DATE :  20 Oct 2021
 # PURPOSE: Create a program to classify Dog breeds images using CNN 
 #          
 # 
