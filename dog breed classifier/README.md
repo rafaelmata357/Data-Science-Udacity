@@ -2,7 +2,9 @@
 
 ## Installation
 
-gh repo clone rafaelmata357/Data-Science-Udacity/dog breed classifier
+```
+$gh repo clone rafaelmata357/Data-Science-Udacity/dog breed classifier
+```
 
 ## Libraries used
 
