@@ -679,5 +679,4 @@ The completion of this project was done thanks to the support of the Udacity tea
 
 The code follows this license: [https://creativecommons.org/licenses/by/3.0/us/](https://creativecommons.org/licenses/by/3.0/us/)
 
-
----
+-----
