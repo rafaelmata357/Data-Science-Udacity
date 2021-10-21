@@ -19,7 +19,7 @@ $gh repo clone rafaelmata357/Data-Science-Udacity/dog breed classifier
 * sklearn
 * json
 
-The libraries details can be found in the requirements.txt file
+The libraries details can be found in the **requirements.txt** file
 
 ## Files in the repository
 
@@ -107,7 +107,7 @@ The CNN must attain at least **60%** accuracy on the test set.
 
 ## Analysis
 
-### The datasets
+## The datasets
 
 #### Data exploration
 
@@ -248,7 +248,7 @@ test_tensors = paths_to_tensor(test_files).astype('float32')/255
 
 ---
 
-# Implementation
+## Implementation
 
 **Three computer methods are used to solve this problem:**
 
@@ -638,7 +638,7 @@ The result shows that even though the dog image data set is not equally distribu
 
 Applying the model with the best validation scores to the test set, the final result for the accuracy is:  **82.10** , which is very similar to the previous results, so the dataset is very stable to train the model, but to improve the results different approaches must be taken and further investigation is needed.
 
-### Justification
+## Justification
 
 The models with the best scores are selected to create the web app, so this are the models selected:
 
