@@ -63,13 +63,13 @@ Image classification is an important task nowadays, plays an important role for 
 
 But categorizing and assigning labels to image is not a simple task for computers, with the advance in Artificial Intelligence, machine learning and image datasets available, now is possible to achive acceptable results in image classification.
 
-As part of the final capstone project for [Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog breeds and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
+As part of the final capstone project for [Data Science Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd0259) from Udacity,  different kind of computing vision algorithms will be used to classify human and dog images and try to predict the dog breed, different datasets with images containing dog and human faces are used to train, validate and test different Convolutional Neural Networks models using supervised learning with the keras framework.
 
-As a final product a web app is deployed putting together a series of models to perform different tasks.
+As a final product a **web app** is deployed putting together a series of models to perform different tasks.
 
 ## Problem statement
 
-The problem to be solved is image classification, we need to classify an image in three categories: dogs, humans and others, If a dog is detected in the image, an estimate of the dog's breed must be provided. If a human is detected also an estimate of the dog breed that is most resembling, if neither is detected in the image, an output message that indicates an error must be shown.
+The problem to be solved is image classification, we need to classify an image in three categories: dogs, humans and others, If a dog is detected in the image an estimate of the dog breed must be provided. If a human is detected also an estimate must be given with the most resembling dog, if neither is detected in the image an output message that indicates an error must be shown.
 
 The project is divided in different steps:
 
@@ -86,15 +86,13 @@ The project is divided in different steps:
 - Step 6: Write a web app
 ```
 
-The expected project results is a web app with at least 60% accuracy, this app will accept any user-supplied image as input and provide a text message as output with the results.
+The expected project results is a web app with at least **60% accuracy**, this app will accept any user-supplied image as input and provide a text message as output with the results.
 
 ## Metrics
 
 Based on the characteristics of the problem which is classification, diffrent metrics can be used: accuracy, precision, recall, f1 score, etc, to measure the performance of the models.
 
-```
-In classification problem we have different results:
-```
+In classification these are the possible results:
 
 - TP: True Positives
 - TN: True Negatives
@@ -115,8 +113,6 @@ The CNN must attain at least **60%** accuracy on the test set.
 
 There are two datasets available to solve this problem
 
-There are two datasets available to solve this problem
-
 - A dataset with 8351 dog images and 133 breeds
 - A dataset with 13233 human face images
 
@@ -128,7 +124,9 @@ These are some statistics about the datasets
 
 ![Dataset stats](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/dataset_characteristics.png)
 
-### Data visualization[¶](http://localhost:8888/lab#Data-visualization)
+### Data visualization
+
+This is the sample distribution
 
 ![Image file sample distribution](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/sample_distribution.png)
 
@@ -137,7 +135,6 @@ The average breeds sample size is between 60 to 70 images per dog, there is top 
 ---
 
 Top and lower breed samples
-
 
 ![Lower breed samples](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/Low%20breed%20chart.png)
 
@@ -155,7 +152,7 @@ The dog images sizes have a right skew distribution with 4% of the files bigger 
 
 ### Data Preprocessing
 
-The images dataset are loaded through the use of the load_files function from the scikit-learn library and different and different variables for the models are generated
+The images dataset are loaded through the use of the load_files function from the scikit-learn library and different variables for the models are generated
 
 * `train_files`, `valid_files`, `test_files` - numpy arrays containing file paths to images
 * `train_targets`, `valid_targets`, `test_targets` - numpy arrays containing onehot-encoded classification labels
@@ -234,7 +231,7 @@ def paths_to_tensor(img_paths):
     return np.vstack(list_of_tensors)
 ```
 
-Moreover getting the 4D tensor ready for ResNet-50, and for any other pre-trained model in Keras, requires some additional processing. First, the RGB image is converted to BGR by reordering the channels and All pre-trained models have the additional normalization step that the mean pixel, This is implemented in the imported function **preprocess_input**
+Moreover getting the 4D tensor ready for ResNet-50, and for any other pre-trained model in Keras, requires some additional processing. First, the RGB image is converted to BGR by reordering the channels and all pre-trained models have the additional normalization step that the mean pixel, This is implemented in the imported function **preprocess_input**
 
 ```
 img = preprocess_input(path_to_tensor(img_path))
@@ -366,7 +363,7 @@ The algorithm is tested with the two datasets (human faces images and dog images
 Three different CNN models are created using Keras:
 
 * A model from Scratch
-* With transfer learning
+* Models with transfer learning
   * VGG16 model
   * Inception V3 model
 
@@ -388,7 +385,7 @@ Three different CNN models are created using Keras:
 * Save the Model with the Best Validation Loss
 * Load the Model with the Best Validation Loss
 * Test the model
-* Evaluate model performance with the accuracy metrics
+* Evaluate model performance with the test set and get the accuracy metrics
 
 ### A CNN model from scratch
 
@@ -551,7 +548,7 @@ face_cascade.detectMultiScale(gray,scale,minNeighbors)
 
 **Inception V3**
 
-The model Inception gets the best results with an accuracy of 80.38%, to impreve this model two strategies are used:
+The model Inception gets the best results with an accuracy of 80.38%, to improve this model two strategies are used:
 
 * Use different hyperparameters:
 
@@ -582,7 +579,7 @@ model.fit(inputs[train], targets[train], validation_data=(inputs[validate], targ
 
 **Cross Validation**
 
-The dataset as we saw before in the data visualization part, is not totally balanced, some breeds hava more than 90 samples, and others has less than 40, in this scenario a technique called k-folding cross validation could be used, instead of split the dataset in training and validation fix sets, different sets are splitted to ensure that all the training and validation set are relatively unbiased, when the process finishes the model the model has been trained using most of the images and the model with the best accuracy result is chosen.
+The dataset as we saw before in the data visualization part, is not totally balanced, some breeds hava more than 90 samples, and others has less than 40, in this scenario a technique called k-folding cross validation could be used, instead of split the dataset in training and validation fix sets, different sets are splitted to ensure that all the training and validation set are relatively unbiased, when the process finishes  the model has been trained using most of the images and the model with the best accuracy result is chosen.
 
 The steps to train the model with cross validation are:
 
@@ -625,13 +622,13 @@ For the two models with transfer learning, the Inception model has the best perf
 * The pretrained model performance per se
 * The architecture used on top of the model, where for the Inception model dropout is applied; this avoid overfitting and get better results
 
-Once the Inception model is chosen we try to improve tuning the different hyperparameters (optimizer and epocs), here are accuracy obtained:
+Once the Inception model is chosen we try to improve it, tuning the different hyperparameters (optimizer and epocs), here is the accuracy obtained:
 
 ![hyperparameter models](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/hyperparameter%20results.png)
 
-From the previous results, the accuracy did not get a good improvement tuning the hyperparameter less than a 2% improvement is achieved across all the possible combinations
+From the previous results, the accuracy did not get a good improvement tuning the hyperparameter, less than a 2% improvement is achieved across all the possible combinations
 
-From here we select the model with rmsprop and try to improve using k-folding cross validation to train the model with all the possible image combinations, these are the results using a k-fold = **8**
+From this point we select the model with **rmsprop** and try to improve using k-folding cross validation to train the model with all the possible image combinations, these are the results using a k-fold = **8**
 
 ![]()
 
@@ -667,9 +664,9 @@ This is how the web app looks like:
 
 ## Conclusion
 
-* CNN is an efficient computer algorithm  to classify images and detect different features, but doing a CNN from scratch requires a lot of time and power  to get an acceptable accuracy
+* CNN is an efficient computer algorithm  to classify images and detect different features, but doing a CNN from scratch requires a lot of time and power  to get an acceptable performance.
 * Using transfer learning improves a lot a image classifier and reduce the training time required to get better results
-* Different image scenarios using can be added to generalize the app functionality and detect other images or combinations like dog and human in the same picture or other kind of images like cats.
+* Different image scenarios  can be added to generalize the app functionality and detect other images or combinations like dog and human in the same picture or other kind of images like cats.
 * Looking forward to improve the accuracy other techniques can be used like image augmentation
 * A web app is a good form to integrate the different models and make it available to the final user
 
