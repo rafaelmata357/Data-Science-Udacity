@@ -673,7 +673,7 @@ This is how the web app looks like:
 
 ## Acknowledgements
 
-The completion of this project was done thanks to the support of the Udacity team and instructors, the initial Jupyter notebook guide was key to develop and complete the project.
+The completion of this project was done thanks to the support of the **Udacity** team and instructors, the initial Jupyter notebook guide was key to develop and complete the project.
 
 ## License
 
