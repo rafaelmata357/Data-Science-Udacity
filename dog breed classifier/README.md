@@ -9,7 +9,6 @@ $gh repo clone rafaelmata357/Data-Science-Udacity/dog breed classifier
 ## Libraries used
 
 * streamlit
-
 * numpy
 * os
 * PIL
@@ -45,9 +44,7 @@ The libraries details can be found in the **requirements.txt** file
 
 **Readme.md** This file
 
-
 ## How to interact with the project
-
 
 From the repository root directory, run the following command:
 
@@ -76,7 +73,7 @@ The project is divided in different steps:
 ```
 - Step 0: Import Datasets, analyze and process
 - Step 1: Detect Humans using the OpenCV framework
-- Step 2: Detect Dogs using the Resnet50 pretrainned CNN
+- Step 2: Detect Dogs using the Resnet50 pretrained CNN
 - Step 3: Create different CNN models to Classify Dog Breeds 
         - A model from Scratch
         - With transfer learning using VGG16 model
@@ -204,7 +201,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 * nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
 
 ```
-from keras.preprocessing import image      
+from keras.preprocessing import image    
 from tqdm import tqdm
 
 def path_to_tensor(img_path):
@@ -295,8 +292,6 @@ def face_detector(img_path):
     return len(faces) > 0
 
 ```
-
-
 
 This algoritmn can also make a rectangle showing the face detected
 
@@ -670,7 +665,6 @@ This is how the web app looks like:
 * Looking forward to improve the accuracy other techniques can be used like image augmentation
 * A web app is a good form to integrate the different models and make it available to the final user
 
-
 ## Acknowledgements
 
 The completion of this project was done thanks to the support of the **Udacity** team and instructors, the initial Jupyter notebook guide was key to develop and complete the project.
@@ -679,4 +673,4 @@ The completion of this project was done thanks to the support of the **Udacity**
 
 The code follows this license: [https://creativecommons.org/licenses/by/3.0/us/](https://creativecommons.org/licenses/by/3.0/us/)
 
------
+---
