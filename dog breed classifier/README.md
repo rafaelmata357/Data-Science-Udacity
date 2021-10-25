@@ -172,7 +172,7 @@ def load_dataset(path):
     return dog_files, dog_targets
 ```
 
-The dog dataset is splitted in three groups to train, validate and test the different models
+The dog dataset is split in three groups to train, validate and test the different models
 
 The human dataset is loaded using the glob function
 
@@ -574,7 +574,7 @@ model.fit(inputs[train], targets[train], validation_data=(inputs[validate], targ
 
 **Cross Validation**
 
-The dataset as we saw before in the data visualization part, is not totally balanced, some breeds hava more than 90 samples, and others has less than 40, in this scenario a technique called k-folding cross validation could be used, instead of split the dataset in training and validation fix sets, different sets are splitted to ensure that all the training and validation set are relatively unbiased, when the process finishes  the model has been trained using most of the images and the model with the best accuracy result is chosen.
+The dataset as we saw before in the data visualization part, is not totally balanced, some breeds hava more than 90 samples, and others has less than 40, in this scenario a technique called k-folding cross validation could be used, instead of split the dataset in training and validation fix sets, different sets are split to ensure that all the training and validation set are relatively unbiased, when the process finishes  the model has been trained using most of the images and the model with the best accuracy result is chosen.
 
 The steps to train the model with cross validation are:
 
