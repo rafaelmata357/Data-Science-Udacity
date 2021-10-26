@@ -1,5 +1,3 @@
-# Dog breed classifier using CNN
-
 ## Installation
 
 ```
@@ -201,7 +199,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 * nb_samples is the number of 3D tensors (where each 3D tensor corresponds to a different image) in the dog images dataset!
 
 ```
-from keras.preprocessing import image    
+from keras.preprocessing import image  
 from tqdm import tqdm
 
 def path_to_tensor(img_path):
