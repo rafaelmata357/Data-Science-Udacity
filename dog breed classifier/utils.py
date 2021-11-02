@@ -3,8 +3,8 @@
 # 
 # PROGRAMMER   : Rafael Mata M.
 # DATE CREATED :  15 Set 2021                                 
-# REVISED DATE :  29 Set 2021
-# PURPOSE: Create a program with utils fuctions to be used in the main program app.py to classify Dogs breeds
+# REVISED DATE :  30 Oct 2021
+# PURPOSE: Create a program with utils fuctions to be used in the main program app.py to classify Dogs breeds and human faces
 
 # Imports python modules
 
