@@ -512,7 +512,7 @@ Inception_model.summary()
 
 ![Inception Model](https://github.com/rafaelmata357/Data-Science-Udacity/blob/master/dog%20breed%20classifier/test_images/inception%20model.png)
 
-After training and testing the model, the accuracy is: **80.3828%**
+After training and testing the model, the accuracy is: **80.34%**
 
 ## Refinement
 
